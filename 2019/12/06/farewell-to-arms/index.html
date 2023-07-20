@@ -1,0 +1,140 @@
+<!Doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Прощай, оружие!</title>
+<meta property="og:title" content="Прощай, оружие!" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Прощай, оружие!" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+<link rel="alternate" type="application/rss+xml" title="Свежая музыка" href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml" />
+    <link rel="stylesheet" href="https://torunar.github.io/css/main.css?v=5.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="https://torunar.github.io/rss.xml" />
+    <link rel="canonical" href="https://torunar.github.io/2019/12/06/farewell-to-arms/" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="https://torunar.github.io/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Прощай, оружие!</h1>
+                    <small class="post__date">2019/12/06</small>
+                </div>
+                <div class="post__preview">
+                    
+<p><img src="https://torunar.github.io/2019/12/06/farewell-to-arms/img/cover.jpg" alt="" title=""></p>
+                </div>
+                <div class="post__content">
+                    
+<p><a href="#hatehatehate">👉 <strong>Пропустить грустные истории и перейти к сути</strong></a></p>
+
+<p>В начале этого года я обратил внимание на боль в запястьях при долгой монотонной нагрузке на руки.</p>
+
+<p>Ревматолог послал меня на анализы и УЗИ, после чего диагностировал бурсит, выписал противовоспалительные и дал мудрый совет: «Следи за собой, будь осторожен».
+Я перестал играть на басу, начал флексить разными эспандерами и всячески контролировать состояние своих рук.</p>
+
+<p><strong>При этом я продолжал работать с Apple Magic Mouse 2 и Apple Magic Keyboard 2 по 8–10 часов в день.</strong></p>
+
+<p>В конце этого года я обратил внимание на онемение в пальцах и скованность в запястьях к концу рабочего дня.</p>
+
+<p>Я посмотрел на руки, заломленные на 40 градусов над плоской клавиатурой, и мизинец, впившийся в торец гладкого скользкого обмылка мыши и понял, что дело в них.
+К клавиатуре и особенно мыши от Apple у меня уже давно были <a href="https://twitter.com/torunar/status/1044504386767073282">претензии</a>, поэтому они были торжественно <del>утилизированы</del> отданы в чужие руки, а им на замену пришли эргономичные клавиатура от Microsoft и вертикальная мышь от Delux.</p>
+
+<p>И на этом историю можно было закончить, руки не болят, программисты счастливы, улыбаются, хлопают друг друга по плечу, код течет рекой, но как в анекдоте, есть нюанс.</p>
+
+<p><a id="hatehatehate"></a></p>
+
+<p>Техника Apple умеет нормально работать с двумя видами клавиатур:</p>
+
+<ol>
+<li>Проприетарные клавиатуры, сделанные для техники Apple.</li>
+<li>Пошел нахуй.</li>
+</ol>
+
+<p>Естественно, при подключении обычной ПК-клавиатуры я огреб по полной.</p>
+
+<h2>Home и End (не) работают</h2>
+
+<p>На ANSI-клавиатуре клавиши Home и End и все возможные сочетания с ними работают максмально космически.
+Во всех IDE от JetBrains они работают нормально, перемещая курсор в начало и конец строки, работает выделение текста.
+В терминале они работают нормально.
+В Firefox работает только навигация по странице, в полях ввода курсор не перемещается.</p>
+
+<p>Коллега, сидевший некоторое время за маком на обычной пекашной клавиатуре, подсказал в качестве решения <a href="https://pqrs.org/osx/karabiner/">Karabiner-Elements</a> — ПО для переназначения клавиатурных событий.
+Ну да, ну да, пошел я красноглазить.</p>
+
+<p>Karabiner-Elements поддерживает сложные модификации: хоть целые макросы на отдельные кнопки навешивай.
+Есть целый сайт c готовыми сценариями, где юзеры прикручивают к macOS клавиатурные сочетания из emacs'а или делают все «шоб как в винде было»: <a href="https://pqrs.org/osx/karabiner/complex_modifications/">https://pqrs.org/osx/karabiner/complex_modifications/</a>.</p>
+
+<p>Беглый поиск показывает, что в сборнике сценариев PC-Style Shortcuts вроде как есть все необходимое:</p>
+
+<p><a href="https://torunar.github.io/2019/12/06/farewell-to-arms/img/01.png"><img src="https://torunar.github.io/2019/12/06/farewell-to-arms/img/01.png" alt="Скриншот, который показывает, сколько разных Home и End предлагает Karabiner-Elements" title=""></a></p>
+
+<p>Первый вопрос, который возникает при взгляде на все это великолепие: зачем столько разных правил для одного и того же действия?
+Второй: что из этого мне нужно?</p>
+
+<p>Спойлер: ничего из этого нормально не работает или требует каких-то хитрых шаманств с порядком подключения.
+Часть правил работает во всех приложениях, но только при включенной английской раскладке (huh, weird).
+Другая часть работает только в одном приложении и ломается во всех остальных.
+Кстати, примечательные правила с пометкой Doesnt work in terminal вполне себе work, только вместо перемещения курсора вкладки переключают.</p>
+
+<p>В комментариях на GitHub я нашел набор правил, который путем явного разграничения совместимых приложений добавлял возможность работы с Home и End как в этих ваших виндузах и люнексах: <a href="https://github.com/pqrs-org/Karabiner-Elements/issues/970#issuecomment-329756606">https://github.com/pqrs-org/Karabiner-Elements/issues/970#issuecomment-329756606</a>.</p>
+
+<h2>Клавиша вызова контекстного меню делает н-и-ч-е-г-о</h2>
+
+<p>Я постоянно использую клавишу контекстного меню в Windows и Linux.
+Я очень страдаю от отсутствия этой клавиши на маке, особенно при работе в IDE.
+Если кто знает, почему этой кнопки нет на эппловских клавиатурах, а macOS принципиально ее не поддерживает — напишите в комментах, будет познавательно.</p>
+
+<p>Но эта клавиша успешно определяется Karabiner-EventViewer'ом как <code>application</code> и ее можно переназначить на что-то более традиционное, например, <code>F20</code>:</p>
+
+<p><a href="https://torunar.github.io/2019/12/06/farewell-to-arms/img/02.png"><img src="https://torunar.github.io/2019/12/06/farewell-to-arms/img/02.png" alt="Скриншот Karabiner-Elements с клавишей application переназначенной на F20" title=""></a></p>
+
+<p>И во всех IDE от JetBrains есть возможность настроить сочетание клавиш для вызова контекстного меню:</p>
+
+<p><a href="https://torunar.github.io/2019/12/06/farewell-to-arms/img/03.png"><img src="https://torunar.github.io/2019/12/06/farewell-to-arms/img/03.png" alt="Скриншот настроек PhpStorm с клавишей F20, назначенной на вызов контекстного меню" title=""></a></p>
+
+<h2>Раскладкопроблемы</h2>
+
+<p>Если указать тип внешней клавиатуры ANSI (United States and others), то в русской раскладке нет буквы «ё».
+Не то, чтобы она была нужна, но за державу обидно.
+Если использовать ISO (European), в английской раскладке нет символа <code>~</code>, вместо него знак параграфа.
+Европейские программисты, how do they work?</p>
+
+<p>В macOS достаточно просто создать собственную раскладку.
+Для этого можно использовать <a href="http://software.sil.org/ukelele/">Ukelele</a>, но я воспользовался готовым <a href="https://www.iphones.ru/iNotes/pc-keyboard-on-mac-osx-guide">руководством</a> с iPhones.ru.</p>
+
+<h2>Вместо заключения</h2>
+
+<p>Немного перефразирую уже озвученную ранее мысль.</p>
+
+<p>Есть два способа работать с продукцией Apple:</p>
+
+<ol>
+<li>Vendor lock-in.</li>
+<li>Пошел нахуй.</li>
+</ol>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a> <a class="telegram" href="https://t.me/misha_talks/">Telegram</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Первичные ключи: Doing It Wrong</title>
+<meta property="og:title" content="Первичные ключи: Doing It Wrong" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Первичные ключи: Doing It Wrong" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Первичные ключи: Doing It Wrong</h1>
+                    <small class="post__date">2014/07/29</small>
+                </div>
+                <div class="post__preview">
+                    
+<p><img src="/2014/07/29/db-indexes/img/cover.png" alt="" title=""></p>
+                </div>
+                <div class="post__content">
+                    
+<p>Об именовании полей первичных ключей можно долго спорить.</p>
+
+<p>В таблицах вида <code>prefix_tablename</code> чаще всего можно встретить такие ПК:</p>
+
+<ul>
+<li><code>id</code> — просто и понятно.</li>
+<li><code>tablename_id</code> — для любителей информационной избыточности.</li>
+<li><code>prefix_tablename_id</code> — треш и угар, например.</li>
+</ul>
+
+<p>Однако, если заглянуть в БД, что ведется Wordpress'ом, можно увидеть, что разработчики не особо заботились о единообразии.</p>
+
+<p>Так, таблица <code>wp_site</code> использует индекс <code>id</code>. Отлично, поехали дальше.</p>
+
+<p><code>wp_posts</code> использует индекс <code>ID</code>. Ладно, кто-то просто любит покричать, SQL же case-insensitive. Да и большие буквы добавляют солидности этой таблице — как-никак, центральный объект WP.</p>
+
+<p><code>wp_comments</code>: <code>comment_ID</code>. Разные регистры в ключе — почему бы и нет, опять же.</p>
+
+<p><code>wp_terms</code> и <code>wp_term_taxonomy</code> используют <code>term_id</code> и <code>term_taxonomy_id</code>. Все еще вписывается в выстроенную систему, да?</p>
+
+<p>Напоследок: первичный ключ <code>wp_sitemeta</code> — <code>meta_id</code>, а вот бедный <code>site</code> куда-то потерялся...</p>
+
+<p>Привет, опенсорс!</p>
+
+<p>А все почему? Потому что нет человека, который в последний момент придет и выдаст разработчикам <a href="#" title="пидздюлей">методические указания</a>, заставив переделать все перед релизом.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

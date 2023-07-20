@@ -1,0 +1,108 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tor и I2P в Linux незаметно от санитаров</title>
+<meta property="og:title" content="Tor и I2P в Linux незаметно от санитаров" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tor и I2P в Linux незаметно от санитаров" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Tor и I2P в Linux незаметно от санитаров</h1>
+                    <small class="post__date">2012/10/11</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Для тех, кто не хочет тратить драгоценные 15 минут в Google.</p>
+                </div>
+                <div class="post__content">
+                    
+<h3>Tor</h3>
+
+<ol>
+<li><p>Установка Tor</p>
+
+<pre><code>sudo apt-get install tor
+</code></pre></li>
+<li><p>Запуск Tor</p>
+
+<pre><code>sudo service tor start
+</code></pre></li>
+</ol>
+
+<h3>I2P</h3>
+
+<ol>
+<li><p>Скачивание и установка <a href="http://www.i2p2.de/debian.html">i2prouter</a></p></li>
+<li><p>Запуск роутера:</p>
+
+<pre><code>i2prouter start
+</code></pre></li>
+<li><p>Добавление подписок в <a href="http://127.0.0.1:7657/dns">адресную книгу</a>:</p>
+
+<pre><code>http:⁄⁄www.i2p2.i2p/hosts.txt
+http:⁄⁄i2host.i2p/cgi-bin/i2hostetag
+http:⁄⁄stats.i2p/cgi-bin/newhosts.txt
+http:⁄⁄inr.i2p/export/alive-hosts.txt
+http:⁄⁄joajgazyztfssty4w2on5oaqksz6tqoxbduy553y34mf4byv6gpq.b32.i2p/export/alive-hosts.txt
+http:⁄⁄tino.i2p/hosts.txt
+http:⁄⁄dream.i2p/hosts.txt
+http:⁄⁄hosts.i2p/
+http:⁄⁄biw5iauxm7cjkakqygod3tq4w6ic4zzz5mtd4c7xdvvz54fyhnwa.b32.i2p/uncensored_hosts.txt
+http:⁄⁄trevorreznik.i2p/hosts.txt
+http:⁄⁄cipherspace.i2p/addressbook.txt
+http:⁄⁄hosts.i2p/hosts.cgi?filter=all
+http:⁄⁄bl.i2p/hosts2.txt
+http:⁄⁄rus.i2p/hosts.txt
+</code></pre></li>
+</ol>
+
+<h3>Настройка браузера (на примере Firefox)</h3>
+
+<ol>
+<li><p>Установка <a href="https://addons.mozilla.org/ru/firefox/addon/proxy-selector/">Proxy Selector</a></p></li>
+<li><p>Настройка прокси для <strong>Tor</strong>:</p>
+
+<p><strong>Тип прокси</strong>: Socks v5 <br>
+<strong>Host</strong>: localhost <br>
+<strong>Port</strong>: 9050</p></li>
+<li><p>Настройка прокси для <strong>I2P</strong>:</p>
+
+<p><strong>Тип прокси</strong>: HTTP <br>
+<strong>Host</strong>: localhost <br>
+<strong>Port</strong>: 4444</p></li>
+<li><p>Настройка DNS для использования .onion-сервисов:</p>
+
+<p>На странице расширенных настроек <about:config> нужно выставить настройку <code>network.proxy.socks_remote_dns</code> в <code>true</code></p></li>
+</ol>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

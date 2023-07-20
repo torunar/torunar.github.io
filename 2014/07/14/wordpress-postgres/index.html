@@ -1,0 +1,69 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wordpress + Postgres via pg4wp: костыли и подпорки</title>
+<meta property="og:title" content="Wordpress + Postgres via pg4wp: костыли и подпорки" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Wordpress + Postgres via pg4wp: костыли и подпорки" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Wordpress + Postgres via pg4wp: костыли и подпорки</h1>
+                    <small class="post__date">2014/07/14</small>
+                </div>
+                <div class="post__preview">
+                    
+                </div>
+                <div class="post__content">
+                    <p>Столкнулся со следующей проблемой при использовании Wordpress в связке с Postgres, а не с предлагаемым по умолчанию MySQL: несмотря на установленное и активированное расширение pg4wp, WP пытается долбиться в базу данных через драйвер mysqli.</p>
+
+<p>Интернеты предлагают <a href="http://wordpress.org/support/topic/not-working-with-39">различные волшебные патчи</a> на интерфейсы к БД, но проблема кроется чуть <a href="https://github.com/WordPress/WordPress/blob/master/wp-includes/wp-db.php">глубже</a>:</p>
+
+<pre><code>if (function_exists('mysqli_connect')) {
+    if (defined('WP_USE_EXT_MYSQL')) {
+        $this-&gt;use_mysqli = !WP_USE_EXT_MYSQL;
+    } elseif (version_compare(phpversion(), '5.5', '&gt;=') || !function_exists('mysql_connect')) {
+        $this-&gt;use_mysqli = true;
+    } elseif (false !== strpos($GLOBALS['wp_version'], '-')) {
+        $this-&gt;use_mysqli = true;
+    }
+}
+</code></pre>
+
+<p>Как видно, если используется PHP версии 5.5 и выше, то WP будет принудительно использовать mysqli, если предварительно в <code>wp_config.php</code> не выставлен флаг <code>WP_USE_EXT_MYSQL</code>.</p>
+
+<p>Установкой данного флага означенная проблема и лечится:</p>
+
+<pre><code>define('WP_USE_EXT_MYSQL', true);
+</code></pre>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

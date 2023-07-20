@@ -1,0 +1,70 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Релиз Cider v1.1.1</title>
+<meta property="og:title" content="Релиз Cider v1.1.1" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Релиз Cider v1.1.1" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Релиз Cider v1.1.1</h1>
+                    <small class="post__date">2019/12/06</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Добавлено версионирование и возможность пересборки отдельных постов.</p>
+                </div>
+                <div class="post__content">
+                    
+<p>Good news everyone! Cider еще жив и продолжает развиваться.</p>
+
+<p>Основные изменения в версии 1.1.1:</p>
+
+<ol>
+<li><p>Cider начал версионироваться с использованием <a href="https://semver.org/">SemVer</a>.</p></li>
+<li><p>Добавлена возможность пересборки отдельных постов.</p>
+
+<p>Она будет полезна при активном редактировании черновика или для исправления опечаток в старых постах без пересборки всего блога.</p>
+
+<p>Slug поста для пересборки указывается в параметре <code>--buildPost</code>:</p>
+
+<pre><code>$ cider.sh --buildPost=2019/12/06/cider-111
+</code></pre>
+
+<p>Для торопливых есть короткий алиас <code>-b</code>:</p>
+
+<pre><code>$ cider.sh -b=2019/12/06/cider-111
+</code></pre></li>
+</ol>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

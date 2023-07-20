@@ -1,0 +1,142 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Minimalist PSP SDK + Code::Blocks в Linux</title>
+<meta property="og:title" content="Minimalist PSP SDK + Code::Blocks в Linux" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Minimalist PSP SDK + Code::Blocks в Linux" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Minimalist PSP SDK + Code::Blocks в Linux</h1>
+                    <small class="post__date">2012/12/25</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Писать на C++ под PSP? С <del>Жирафиком Рафиком</del> Minimalist PSP SDK это так просто!</p>
+                </div>
+                <div class="post__content">
+                    
+<h3>Необходимые пакеты</h3>
+
+<ol>
+<li><p>CodeBlocks и магия</p>
+
+<pre><code>$ sudo apt-get install autoconf automake bison flex gcc libmpfr-dev libncurses5-dev libreadline-dev libusb-dev make patch subversion texinfo wget zlib1g-dev ligmp3c2 libgmp3-dev codeblocks
+</code></pre></li>
+<li><p>Minimalist PSP SDK</p></li>
+</ol>
+
+<p>Последнюю версию можно найти на странице проекта на Sourceforge: <a href="http://sourceforge.net/projects/minpspw/">minpspw</a></p>
+
+<h3>Hастройка Code::Blocks</h3>
+
+<ol>
+<li><p>Setting → Compiler and debugger…&lt;.p>2. В поле Selected complier выбрать GNU GCC Compiler, нажать Copy</p></li>
+<li><p>Ввести имя компилятора (например, PSP-GCC)</p></li>
+<li><p>Выбрать созданный компилятор, перейти на вкладку Toolchain executables</p>
+
+<ol>
+<li><p>Compiler’s directory: /opt/pspsdk/</p></li>
+<li><p>На вкладке Program Files:</p></li>
+</ol>
+
+<p><strong>C compiler:</strong> psp-gcc <br>
+<strong>C++ compiler:</strong> psp-g++ <br>
+<strong>Linker for dynamic libs:</strong> psp-g++ <br>
+<strong>Linker for static libs:</strong> psp-ar <br>
+<strong>Debugger:</strong> <br>
+<strong>Resource compiler:</strong> <br>
+<strong>Make program:</strong> make</p>
+
+<ol>
+<li>Перейти на вкладку Search directories</li>
+</ol></li>
+<li><p>На вкладке Complier добавить:</p>
+
+<pre><code>/opt/pspsdk/include
+/opt/pspsdk/psp/include
+/opt/pspsdk/psp/sdk/include
+</code></pre></li>
+<li><p>На вкладке Linker добавить:</p>
+
+<pre><code>/opt/pspsdk/lib
+/opt/pspsdk/psp/lib
+/opt/pspsdk/psp/sdk/lib
+</code></pre></li>
+</ol>
+
+<h3>Makefile</h3>
+
+<p>Также понадобится этот makefile:</p>
+
+<pre><code>TARGET = main
+OBJS = main.o
+
+INCDIR = 
+CFLAGS = -O2 -G0 -Wall
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+ASFLAGS = $(CFLAGS)
+
+LIBDIR =
+LDFLAGS =
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = HelloWorld
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+include $(PSPSDK)/lib/build.mak
+</code></pre>
+
+<p>Его нужно поместить в папку с проектом Code::Blocks.</p>
+
+<h3>Проект</h3>
+
+<ol>
+<li><p>File → New → Project → Console Application</p></li>
+<li><p>Выбрать язык и размещение проекта</p></li>
+<li><p>Compiler: тот, что был создан (PSP-GCC)</p></li>
+<li><p>Project → Properties</p></li>
+<li><p>В поле Makefile указать имя созданного ранее makefile и отметить “This is a custom makefile”</p></li>
+<li><p>На вкладке Build targets:</p>
+
+<p><strong>Output filename:</strong> bin/Debug/psp.elf (для Debug) <br>
+<strong>Output filename:</strong> bin/Debug/psp.elf (для Release)</p></li>
+<li><p>Project → Properties → Project’s build options</p></li>
+<li><p>На вкладке “Make” commands удалить переменную $target из Debug и Release</p></li>
+</ol>
+
+<p>В результате билда в папке будет создан EBOOT.PBP, который можно будет запустить на PSP.</p>
+
+<p>Для проверки можно воспользоваться этим исходником, который выводит классический “Hello World”: <a href="./bin/main.tar.gz">main.tar.gz</a></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Проблемы сериализации при атаке «Звезды смерти»</title>
+<meta property="og:title" content="Проблемы сериализации при атаке «Звезды смерти»" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Проблемы сериализации при атаке «Звезды смерти»" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Проблемы сериализации при атаке «Звезды смерти»</h1>
+                    <small class="post__date">2017/02/26</small>
+                </div>
+                <div class="post__preview">
+                    
+<p><img src="/2017/02/26/unserialize-issues/img/cover.png" alt="" title=""></p>
+                </div>
+                <div class="post__content">
+                    
+<p>Оказался я пару дней назад в весьма неприятной ситуации.
+Есть огромный SQL-дамп базы проекта, который работал на сервере под управлением 64-битной ОС.
+Некоторые поля записей содержат данные, обработанные функцией <a href="http://php.net/manual/en/function.serialize.php"><code>serialize()</code></a>.</p>
+
+<p>После разворачивания дампа БД на сервере с 32-битной ОС проект оказался частично нерабочим: попытки десериализации некоторых данных заканчивались неудачей.
+Я бы махнул на это рукой, но требования к работоспособности были достаточно четкие: «шоб везде».</p>
+
+<p>Разберемся для начала, откуда вообще растут ноги проблемы.</p>
+
+<p>Многие со школы помнят следующую формулу:</p>
+
+<blockquote>
+  <p>I<sub>max</sub> = 2<sup>n – 1</sup> – 1,</p>
+</blockquote>
+
+<p>где:</p>
+
+<ul>
+<li><em>n</em> — разрядность системы,</li>
+<li><em>I<sub>max</sub></em> — максимальное значение знакового целого числа, возможного в данной разрядности.</li>
+</ul>
+
+<p>Так, для 32-битной системы, <em>I<sub>max</sub></em> равно <a href="https://en.wikipedia.org/wiki/2147483647_(number">2147483647</a>), а для 64-битной — <a href="https://en.wikipedia.org/wiki/9223372036854775807">9223372036854775807</a>.</p>
+
+<p>Результаты сериализации чисел, значение которых превышает выше упомянутое 2147483647, для разных ОС также будут различными. Рассмотрим на примере 4294967296:</p>
+
+<pre><code>vagrant@trusty64:~ $ php -r 'var_dump(serialize(4294967296));'
+string(13) "i:4294967296;"
+
+vagrant@trusty32:~ $ php -r 'var_dump(serialize(4294967296));'
+string(13) "d:4294967296;"
+</code></pre>
+
+<p>Как видно, на 64-битной системе число было сериализовано с типом <code>i</code>, integer (целое число), а на 32-битной — c типом <code>d</code>, double precision (число двойной точности).</p>
+
+<p>Соответственно, при попытке десериализации <code>i:4294967296;</code> на 32-битной ОС будет предпринята попытка поместить в целое число значение превышающее максильно допустимое, что приведет к возникновению ошибки.</p>
+
+<p>Посмотрев на вывод функции, я решил подойти к решению проблемы в лоб и заменить в дампе все целочисленные значения на значения двойной точности:</p>
+
+<pre><code>vagrant@trusty64:~ $ sed -i.bak -E -e 's/i:([0-9]+)\;/d:\1\;/g' dump.sql
+</code></pre>
+
+<p>Однако это не обеспечило работоспособности приложения, напротив, породило только большее количество ошибок.
+Вместо этого я решил положиться на утиную типизацию в PHP и заменил все числовые значения на строки: так, <code>i:4294967296;</code> стало <code>s:10:"4294967296";</code>.</p>
+
+<p>В процессе я накидал простой скрипт <a href="https://github.com/torunar/facepalm">facepalm.php</a>: он проходится по скормленному ему файлу и заменяет все представления целых чисел строками.
+Этим скриптом я прошерстил дамп проекта, что позволило завести его как в 32-, так и в 64-битной ОС.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

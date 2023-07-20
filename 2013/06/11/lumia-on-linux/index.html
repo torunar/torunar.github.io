@@ -1,0 +1,90 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Заводим передачу файлов с Nokia Lumia 520 в Ubuntu 13.04</title>
+<meta property="og:title" content="Заводим передачу файлов с Nokia Lumia 520 в Ubuntu 13.04" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Заводим передачу файлов с Nokia Lumia 520 в Ubuntu 13.04" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Заводим передачу файлов с Nokia Lumia 520 в Ubuntu 13.04</h1>
+                    <small class="post__date">2013/06/11</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Купил новый телефон, но вот беда — к ПК под управлением Ubuntu 13.04 его не подключить.</p>
+                </div>
+                <div class="post__content">
+                    
+<p>SpaceFM его как флешку не определяет. <br>
+gvfs устройство не видит. <br>
+udev молчит.</p>
+
+<p>Спросил совета на reddit'е, ткнули сюда: <a href="http://blog.wapreview.com/19006/">Transferring Files Between Windows Phone 8 and Ubuntu</a></p>
+
+<p>Выяснилось, что, Nokia Lumia 520 как Mass Storage устройство не работает, но умеет передавать данные по Media Transfer Protocol.</p>
+
+<p>Поставил Nautilus, который недавно дропнул при переезде.</p>
+
+<p>Nautilus телефон видит, доступ к нему ведет по протоколу gphoto2 — попробуем покопать в этом направлении.</p>
+
+<ul>
+<li><p>Ставим gphotofs</p>
+
+<pre><code>sudo apt-get install gphotofs
+</code></pre></li>
+<li><p>Редактируем /etc/fuse.conf, раскомментируя строку</p>
+
+<pre><code>user_allow_other
+</code></pre></li>
+<li><p>Монтируем устройство</p>
+
+<pre><code>sudo gphotofs -o allow_other /mnt
+</code></pre></li>
+</ul>
+
+<p>Теперь содержимое телефона доступно по адресу /mnt.</p>
+
+<p>Чтобы отмонтировать телефон, необходимо выполнить</p>
+
+<pre><code>fusermount -u /mnt
+</code></pre>
+
+<p><strong>UPD:</strong> с недавнего времени PCManFM научился нормально работать с MTP-устройствами, так что файловые операции можно спокойно выполнять в нем. Однако, внесение указанных изменений в /etc/fuse.conf все равно требуется.</p>
+
+<p>При подключении телефона придется выполнить команду</p>
+
+<pre><code>sudo mtpfs
+</code></pre>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

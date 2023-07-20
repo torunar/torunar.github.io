@@ -1,0 +1,89 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Баг с кнопкой питания в Linux Mint 13 "Maya"</title>
+<meta property="og:title" content="Баг с кнопкой питания в Linux Mint 13 "Maya"" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Баг с кнопкой питания в Linux Mint 13 "Maya"" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Баг с кнопкой питания в Linux Mint 13 "Maya"</h1>
+                    <small class="post__date">2012/09/27</small>
+                </div>
+                <div class="post__preview">
+                    
+                </div>
+                <div class="post__content">
+                    <h3>Интродукция</h3>
+
+<p><em>Входит Ромео</em></p>
+
+<p>В Linux Mint 13 в качестве одной из оболочек используется Mate — форк от GNOME2. Как следствие, стандартные компоненты GNOME2 (такие, как gnome-power-manager, gnome-settings-daemon, gnome-network-manager) оказались переименованы.</p>
+
+<h3>Акт 1</h3>
+
+<p><em>Входят Меркуцио и Тибальт</em></p>
+
+<p>Проблемы начались сразу же после установки. Настройки питания имели вид:</p>
+
+<p><img src="./img/01.png" alt="" title="">  </p>
+
+<p>Однако, система при нажатии кнопки питания, успев на пару секунд выдать-таки запрос дальнейших действий, все равно выключалась.</p>
+
+<h3>Акт 2</h3>
+
+<p><em>Входит Джульетта</em></p>
+
+<p>Решение кроется в следующей последовательности действий:</p>
+
+<ol>
+<li><p>Установка acpi</p>
+
+<pre><code>sudo apt-get install acpi
+</code></pre></li>
+<li><p>Изменение настроек поведения кнопок питания в <code>/etc/acpi/powerbtn.sh</code></p>
+
+<p>В данном файле необходимо найти строку</p>
+
+<pre><code>PMS="gnome-settings-daemon kpowersave xfce4-power-manager"
+</code></pre>
+
+<p>и заменить ее на</p>
+
+<pre><code>PMS="mate-settings-daemon gnome-settings-daemon kpowersave xfce4-power-manager"
+</code></pre>
+
+<p>После этого событие нажатия кнопки питания будет замечено, перехвачено и корректно обработано</p></li>
+</ol>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

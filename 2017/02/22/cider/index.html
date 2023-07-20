@@ -1,0 +1,115 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cider: движок для блога на Markdown из bash и sed</title>
+<meta property="og:title" content="Cider: движок для блога на Markdown из bash и sed" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Cider: движок для блога на Markdown из bash и sed" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Cider: движок для блога на Markdown из bash и sed</h1>
+                    <small class="post__date">2017/02/22</small>
+                </div>
+                <div class="post__preview">
+                    
+<p><img src="/2017/02/22/cider/img/cover.jpg" alt="" title=""></p>
+
+<p>Это второй (и заключительный) пост о том, как я отказался от Tumblr в пользу генераторов статических сайтов.</p>
+                </div>
+                <div class="post__content">
+                    
+<p>В <a href="/2017/02/21/tumblr-blog-dumper">прошлом посте</a> я рассказывал, как экспортировал свой блог и свалил в закат.</p>
+
+<blockquote>
+  <p>После экспорта у нас было 65 постов в Markdown, 75 папок с картинками, пять цитат и диалогов, полсолонки <a href="https://pages.github.com">GitHub Pages</a> и целое множество мелких движков для блогов всех сортов и расцветок, <a href="https://sculpin.io">Sculpin</a>, а также <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://gohugo.io">Hugo</a>, ящик <a href="https://blogc.rgm.io">blogc</a>, пинта чистого <a href="https://pypi.python.org/pypi/Sphinx">Sphinx</a> и две дюжины <a href="https://staticsitegenerators.net">других решений</a>.
+Не то чтобы это был необходимый запас для блоггинга, но если начал собирать дурь, становится трудно остановиться.
+Единственное, что вызывало у меня опасение — это самописные системы.
+Ничто в мире не бывает более беспомощным, безответственным и порочным, чем зомби-красноглазики.
+Я знал, что рано или поздно мы перейдем и на эту дрянь.</p>
+</blockquote>
+
+<p>Изначально я хотел держать блог на <a href="https://pages.bitbucket.io">Bitbucket Pages</a>, но этот вариант отпал почти сразу по двум причинам:</p>
+
+<ul>
+<li>Нет поддержки Jekyll из коробки — собирать страницы придется самостоятельно.</li>
+<li>Нет возможности привязать свой домен — придется сидеть с адресом вида torunar.bitbucket.io.</li>
+</ul>
+
+<p>Передо мной стоял выбор: использовать GitHub Pages или же взять какой-нибудь генератор статических сайтов и хостить все на своем сервере.
+В этот момент в моей голове проснулся Упоротый лис и сказал: «Эй, чувак, ты не хочешь использовать готовые решения на Ruby, Python или PHP. Ты хочешь написать движок под свои нужды. <strong>Hа bash</strong>».
+Я понимаю, насколько дико это все звучит, но мне действительно пришла в голову мысль написать шаблонизатор на базе консольных утилит (find, grep, sed и т.д.) и выстроить вокруг него движок для блога, писать посты в Markdown и компилировать их в HTML.</p>
+
+<p>В результате на свет родился блоговый движок <a href="https://github.com/torunar/cider">Cider</a>. Название выбрано неслучайно: кто же будет пользоваться таким на трезвую голову?</p>
+
+<p>Cider работает по следующему принципу:</p>
+
+<ol>
+<li><p>Сканируется папка с постами. Они должны быть распложены в следующей иерархии:</p>
+
+<pre><code>YYYY
+├── MM
+│   ├── DD
+│   │   └── i-can-has-cheezburger
+│   │        └── index.md
+│   └── DD
+│       └── lol-limeware
+│            └── index.md
+└── MM
+    └── DD
+         ├── all-your-base
+         │    └── index.md
+         └── are-belong-to-us
+              └── index.md
+</code></pre></li>
+<li><p>Каждый пост собирается с помощью компилятора Markdown от <a href="http://daringfireball.net/projects/markdown/">Daring Fireball</a>.</p>
+
+<ol>
+<li><p>Заголовок поста берется из заголовка документа — содержимого первого элемента <code>&lt;h1&gt;</code> (<code>#</code>):</p>
+
+<pre><code># После компиляции это станет заголовком поста
+</code></pre></li>
+<li><p>Краткое описание формируется из текста, заключенного между элементами <code>&lt;hr&gt;</code> (<code>* * *</code>):</p>
+
+<pre><code>* * *
+После компиляции это станет кратким описанием поста
+* * *
+</code></pre></li>
+<li><p>Текст поста — остальное содержимое документа.</p></li>
+<li><p>Дата публикации поста и его <a href="https://en.wikipedia.org/wiki/Semantic_URL#Slug">slug</a> определяются на основе пути в папке с постами — <code>YYYY/MM/DD</code> и <code>i-can-has-cheezburger</code>.</p></li>
+</ol>
+
+<p><p>Все эти данные вставляются в соответствующие шаблоны темы — таким образом формируются страница просмотра поста, индексные страницы со списками постов и элементы для карты сайта.</p></li>
+</ol>
+Пока на Cider сделан всего один блог — мой, поэтому движком реализуется лишь та функциональность, что была восстребована на период написания этого поста.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

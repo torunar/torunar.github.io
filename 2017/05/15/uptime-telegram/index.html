@@ -1,0 +1,130 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Оповещения о состоянии сервера с UptimeRobot и Telegram</title>
+<meta property="og:title" content="Оповещения о состоянии сервера с UptimeRobot и Telegram" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Оповещения о состоянии сервера с UptimeRobot и Telegram" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Оповещения о состоянии сервера с UptimeRobot и Telegram</h1>
+                    <small class="post__date">2017/05/15</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Балуемся API Telegram и делаем маленький бот-оповещалку о падениях сервера.</p>
+                </div>
+                <div class="post__content">
+                    
+<p>Для легкого мониторинга доступности сайтов я уже более года использую сервис <a href="https://uptimerobot.com">UptimeRobot</a>. Он предоставляет инструменты для проверки состояния на основании нескольких критериев:</p>
+
+<ul>
+<li>Код ответа HTTP.</li>
+<li>Наличие или отсутствие ключевого слова в теле страницы.</li>
+<li>ping.</li>
+<li>Доступность порта.</li>
+</ul>
+
+<p>Для оповещений о падениях UptimeRobot предлагает использовать веб-хуки, SMS, публикации в Twitter, сообщения в Slack, пуш-нотификации для iOS и Android и, разумеется, старые добрые электронные письма. Последними я и пользовался до недавнего времени, пока не захотелось странного — интеграции с Telegram.</p>
+
+<h2>Регистрация бота в Telegram</h2>
+
+<p>Все начинается с регистрации бота. Для этого используется официальный бот <a href="https://t.me/botfather">BotFather</a> — команда <code>/newbot</code> позволит в интерактивном режиме создать бота и получить необходимый <strong>токен</strong> для работы с HTTP API:</p>
+
+<p><img src="./img/01.png" alt="Регистрация бота через BotFather" title=""></p>
+
+<p>После создания бота нужно выйти с ним на связь — отправьте ему сообщение с произвольным текстом. В ответ... ничего. Так и должно быть: бот маленький и тупой, начинки у него нет. Это сообщение необходимо в дальнейшем для определения получателя.</p>
+
+<p><img src="./img/02.png" alt="Первое сообщение новому боту" title=""></p>
+
+<p>Откройте в браузере следующий URL: <code>https://api.telegram.org/bot&lt;token&gt;/getUpdates</code>, где <code>&lt;token&gt;</code> — полученный от BotFather токен. В результате будет выполнен запрос к API для получения последних обращений к боту, ответ должен иметь следующий вид:</p>
+
+<pre><code>{
+    "ok": true,
+    "result": [
+        {
+            "update_id": 282483725,
+            "message": {
+                "message_id": 2,
+                "from": {
+                    "id": &lt;chat_id&gt;,
+                    "first_name": "Mike",
+                    "last_name": "Schekotov",
+                    "username": "torunar"
+                },
+                "chat": {
+                    "id": &lt;chat_id&gt;,
+                    "first_name": "Mike",
+                    "last_name": "Schekotov",
+                    "username": "torunar",
+                    "type": "private"
+                },
+                "date": 1494867575,
+                "text": "Hello!"
+            }
+        }
+    ]
+}
+</code></pre>
+
+<p>Здесь <code>&lt;chat_id&gt;</code> — искомый <strong>идентификатор получателя</strong>.</p>
+
+<h2>Настройка оповещений в UptimeRobot</h2>
+
+<p>Для уведомления о падениях сервера нужно настроить новый способ оповещения в секции <strong>Alert Contacts</strong> на странице настройки профиля <strong>My Settings</strong>.</p>
+
+<p>В поле <strong>Alert Contact Type</strong> нужно выбрать <strong>Web-Hook</strong>, во <strong>Friendly Name</strong> — указать любое понятное описание.</p>
+
+<p>В качестве <strong>URL to Notify</strong> нужно использовать <code>https://api.telegram.org/bot&lt;token&gt;/sendMessage?</code> — <code>?</code> в конце важен.</p>
+
+<p>Основная магия происходит в <strong>POST Value (JSON Format)</strong>. Здесь нужно указать получателя и непосредственно текст оповещения:</p>
+
+<pre><code>{
+    "chat_id": "&lt;chat_id&gt;",
+    "text": "*monitorFriendlyName* (*monitorURL*) is *alertTypeFriendlyName* (*alertDetails*)"
+}
+</code></pre>
+
+<p><code>&lt;chat_id&gt;</code> — это <strong>идентификатор получателя</strong> из запроса <code>getUpdates</code>.</p>
+
+<p>В тексте уведомления, которое будет отправлено при смене статуса ресурса, UptimeRobot позволяет использовать определенные подстановочные переменные, заключенные в <code>*</code> — полный список с пояснениями доступен на форме создания контакта.</p>
+
+<p>Остается только создать новый ресурс для мониторинга и включить бота в список получателей в секции <strong>Select "Alert Contacts To Notify"</strong>.</p>
+
+<p><img src="./img/03.png" alt="Настройка получателей в UptimeRobot" title=""></p>
+
+<p>Теперь бот будет уведомлять о смене состояния доступности сервера:</p>
+
+<p><img src="./img/04.png" alt="случиласьстрашнаяхуйня" title=""></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

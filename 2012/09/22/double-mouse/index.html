@@ -1,0 +1,85 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Одновременное использование двух мышей в Linux</title>
+<meta property="og:title" content="Одновременное использование двух мышей в Linux" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Одновременное использование двух мышей в Linux" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Одновременное использование двух мышей в Linux</h1>
+                    <small class="post__date">2012/09/22</small>
+                </div>
+                <div class="post__preview">
+                    
+                </div>
+                <div class="post__content">
+                    <p>Обнаружив весьма интересную <a href="http://www.opennet.ru/tips/info/2271.shtml">статью на OpenNet</a>, захотел попробовать описанные в ней возможности. Убедившись, что метод работает и даже весьма удобен для работы в ряде приложений-редакторов, имеющих множество панелей, решил написать простой <a href="./bin/double-mouse.sh">скрипт</a>, позволяющий быстро включить-выключить несколько мышей:</p>
+
+<pre><code>#!/usr/bin/env bash
+vendor="Elantech"
+if [ $1 ]; then
+    case $1 in
+        'on')
+            active=$(xinput list | grep 'Auxiliary pointer')
+            if [ -n "$active" ]; then
+                echo 'Already active'
+            else
+                touchpad=$(xinput list | grep "$vendor" | egrep -o '=[0-9]*' | egrep -o '[0-9]{1,2}')
+                xinput create-master Auxiliary
+                xinput reattach $touchpad "Auxiliary pointer"
+            fi
+            ;;
+        'off')
+            active=$(xinput list | grep 'Auxiliary pointer')
+            if [ -z "$active" ]; then
+                echo 'Already inactive'
+            else
+                touchpad=$(xinput list | grep "$vendor" | egrep -o '=[0-9]*' | egrep -o '[0-9]{1,2}')
+                group=$(xinput list | grep 'Auxiliary pointer' | egrep -o '=[0-9]*' | egrep -o '[0-9]{1,2}')
+                xinput reattach $touchpad "Virtual core pointer"
+                xinput remove-master $group
+            fi
+            ;;
+        *)
+            echo 'Usage: double-mouse.sh on|off'
+            ;;
+    esac
+else
+    echo 'Usage: double-mouse.sh on|off'
+fi
+</code></pre>
+
+<p>Для работы этого скрипта замените “Elantech” в строке <code>vendor="Elantech"</code>на название дополнительной мыши. Чтобы узнать его, выполните <code>xinput list</code></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

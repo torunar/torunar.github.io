@@ -1,0 +1,76 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Проблемы с LaTeX после обновления ОС</title>
+<meta property="og:title" content="Проблемы с LaTeX после обновления ОС" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Проблемы с LaTeX после обновления ОС" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+    <link rel="stylesheet" href="/css/main.css?v=3.1.1" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="/rss.xml" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Проблемы с LaTeX после обновления ОС</h1>
+                    <small class="post__date">2014/01/22</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>После переезда с Ubuntu 12.04 на Ubuntu 13.10 возобновил работу над дипломом. В связи с обновлениями компонентов LaTeX вылезли сразу несколько неприятных моментов.</p>
+                </div>
+                <div class="post__content">
+                    
+<h3>Макро \No перестало существовать</h3>
+
+<p>Его признали ненужным, так как символ № уже есть на клавиатуре.</p>
+
+<p>Чтобы не проходить заменой \No → № или \No → \textnumero по всем файлам, можно вставить в преамбулу:</p>
+
+<pre><code>\newcommand{\No}{\textnumero}
+</code></pre>
+
+<h3>Сломалась расстановка переносов в составных словах</h3>
+
+<p>Ранее я использовал следующее макро для XeTex:</p>
+
+<pre><code>\XeTeXinterchartoks 24 0 ={\hskip\z@skip}
+</code></pre>
+
+<p>Сейчас использование этой команды ведет к следующей ошибке:</p>
+
+<blockquote>
+  <p>Последовательность \z@skip не определена.</p>
+</blockquote>
+
+<p>Проблема лечится заменой на:</p>
+
+<pre><code>\XeTeXinterchartoks 24 0 ={\hskip 0pt plus0pt minus0pt}
+</code></pre>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

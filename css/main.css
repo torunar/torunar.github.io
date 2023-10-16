@@ -250,22 +250,21 @@ iframe {
 }
 
 [class^="gallery-"] {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: var(--uiHalfGap);
+}
+
+.gallery-4 {
+    grid-template-columns: auto auto auto auto;
+}
+
+.gallery-2 {
+    grid-template-columns: auto auto;
 }
 
 [class^="gallery-"] a img {
     width: 100%;
     display: block;
-}
-
-.gallery-4 > a {
-    flex: 0.25;
-}
-
-.gallery-2 > a {
-    flex: 0.5;
 }
 
 .footer {

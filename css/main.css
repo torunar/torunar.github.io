@@ -210,10 +210,6 @@ iframe:last-of-type {
     margin-bottom: var(--textMargin);
 }
 
-.post p:last-child {
-    margin-bottom: 0;
-}
-
 .post img {
     display: block;
     margin: 0 auto;

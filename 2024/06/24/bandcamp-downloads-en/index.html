@@ -41,11 +41,11 @@
 <p><em><strong>Disclaimer</strong>: It turned out to be much longer and personal than I originally expected.</em>
 <em>I decided to keep it this way, but if you came here only for programming stuff, you are more than welcome to <a href="#technical">skip to technical details</a>.</em></p>
 
-<p>Man, I love Bandcamp. 
-For me it's the only platform that sparkles joy of discovering, listening and buying music. 
-Compared to Spotify, Apple Music or YouTube, Bandcamp doesn't seem to have The Algorithm™. 
-You can subscribe to genres  and it will simply show random new releases mixed with not-so-new releases in your feed: some of the albums will be pure gold, others will be utter garbage. 
-You can follow artists for new hot stuff, but it will not affect your recommendation feed anyhow. 
+<p>Man, I love Bandcamp.
+For me it's the only platform that sparkles joy of discovering, listening and buying music.
+Compared to Spotify, Apple Music or YouTube, Bandcamp doesn't seem to have The Algorithm™.
+You can subscribe to genres  and it will simply show random new releases mixed with not-so-new releases in your feed: some of the albums will be pure gold, others will be utter garbage.
+You can follow artists for new hot stuff, but it will not affect your recommendation feed anyhow.
 Call me old fashioned, but I love the vibes it gives: even though new music is delivered straight to your browser, you still need to put in extra effort to find something that you really like and you can't predict where the journey takes you.</p>
 
 <p>It brings back memories of being a teenager during the mid-2000s in my hometown.
@@ -61,46 +61,52 @@ It was a gamble, and I enjoyed every single minute of it.</p>
 <p>I don't get the same feeling from Spotify where recommendations look like "You liked sugar, so you'll probably like maltitol and aspartame" and I hate Apple way too much to even consider the idea of buying their music service subscription.
 Subscriptions in general don't cut it for me: if I paid for music, I want it safely stored on my computer so I can copy it to my audio player (with hardware buttons) and listen it through wired headphones:</p>
 
-<p>And it's not just music: I feel deeply betrayed by Sony who banned one of my PlayStation accounts and won't allow me to buy games from one of the remaining two; 
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/player.jpg" alt="Player" title=""></p>
+
+<p>And it's not just music: I feel deeply betrayed by Sony who banned one of my PlayStation accounts and won't allow me to buy games from one of the remaining two;
 the possibility of losing access to Steam games I (don't) own also looks quite grim.
 This is the reason why I prefer GOG.com nowadays: I can download DRM-free installers to my computer and will be able to play Heroes of Might and Magic III even when society crumbles and the Internet goes dark.</p>
 
-<p>Considering my love for Bandcamp, it should not come as a surprise that I also enjoy fiddling with it programmatically. 
+<p>Considering my love for Bandcamp, it should not come as a surprise that I also enjoy fiddling with it programmatically.
 I call it fiddling for a simple reason: they don't provide official APIs for most of the things you can do on the site, but the site itself is built smart enough to allow me to craft these tools:</p>
 
-<p><strong><a href="https://github.com/torunar/bc-player">BC Player</a></strong>: an alternative Bandcamp music player that supports queuing (it also has a <a href="https://github.com/torunar/bc-player-helper">browser extension</a> to directly integrate with Bandcamp feed).</p>
+<p><strong><a href="https://github.com/torunar/bc-player">BC Player</a></strong>:
+an alternative Bandcamp music player that supports queuing (it also has a <a href="https://github.com/torunar/bc-player-helper">browser extension</a> to directly integrate with Bandcamp feed).</p>
 
-<p><strong><a href="https://github.com/torunar/bandcamp-liked-albums-widget">Liked albums widget</a></strong>: 
-Bandcamp doesn't have "likes" per se, but you can wishlist stuff — and hey, they use a heart icon for it, close enough. 
+<p><strong><a href="https://github.com/torunar/bandcamp-liked-albums-widget">Liked albums widget</a></strong>:
+Bandcamp doesn't have "likes" per se, but you can wishlist stuff — and hey, they use a heart icon for it, close enough.
 List of wishlisted albums is accessible through (non-documented, of course) search API, which allowed me to build a site where everyone can showcase a collection of releases they like.
 Here is mine, for example:</p>
 
-<iframe src="https://torunar.github.io/bandcamp-liked-albums-widget/?fan_id=3382834" style="min-height: 270px; margin-bottom: var(--uiGap);"></iframe>  
+<iframe src="https://torunar.github.io/bandcamp-liked-albums-widget/?fan_id=3382834" style="min-height: 270px; margin-bottom: var(--uiGap);"></iframe>
 
-<p><strong><a href="https://github.com/torunar/rss-feeds">Liked albums RSS</a></strong>: it's basically the same thing in the form of an RSS feed.
+<p><strong><a href="https://github.com/torunar/rss-feeds">Liked albums RSS</a></strong>:
+it's basically the same thing in the form of an RSS feed.
 I mostly follow blackgaze, math rock, synthwave and breakcore, so if you want to stay tuned with what catches my attention on Bandcamp, just add this URL in your RSS reader of choice: <a href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml">https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml</a>.</p>
 
-<p>I mentioned buying stuff from Bandcamp, but a lot of music there is available for free, you just go and download it. 
-Legally. No strings attached. They even let you choose the format and quality, isn't it nice?</p>
+<p>I mentioned buying stuff from Bandcamp, but a lot of music there is available for free, you just go and download it.
+Legally.
+No strings attached.
+They even let you choose the format and quality, isn't it nice?</p>
 
 <p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/format-selector.png" alt="Bandcamp download format selector" title=""></p>
 
-<p>And even if something is not available freely, there's of course a way to download it with, say, <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>. 
+<p>And even if something is not available freely, there's of course a way to download it with, say, <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>.
 Bandcamp understand it and openly admit that they're not going to spend development time and money to fix something that is not broken: <a href="https://bandcamp.com/help/audio_basics#steal">"I heard you can steal music on Bandcamp. What are you doing about this?"</a>.
 If you want to support a performer, just name your price (some albums have minimal price set, you can add extra on top) — the artist will get most of the money you paid, and you'll get a copy of the album to listen on your audio player (with hardware buttons!).</p>
 
 <p><span id="technical"></span>
-Which brings me to the topic of this post: how does downloading free (i.e., distributed without a lower price limit set) music work on Bandcamp? 
-What if I want to have a local backup of all the free releases from my wishlist? 
-Bandcamp don't seriously expect me to go through the manual download process for every single album, do they? 
+Which brings me to the topic of this post: how does downloading free (i.e., distributed without a lower price limit set) music work on Bandcamp?
+What if I want to have a local backup of all the free releases from my wishlist?
+Bandcamp don't seriously expect me to go through the manual download process for every single album, do they?
 Even if they do, I'm pretty sure there is a way to work it around.
 Let's go to a <a href="https://sugarwounds.bandcamp.com/album/mechanical-friends-remastered">free album page</a>, ask for a download and see where Bandcamp redirect me:</p>
 
 <pre><code>https://bandcamp.com/download?id=472457604&amp;ts=1719170366.294537336&amp;tsig=5e1411c3cc4ffe2b0c02b31ffb0e60de&amp;type=album
 </code></pre>
 
-<p>Okay, the URL has something that looks like an album ID, some token and signature. 
-Downloading different albums gives different IDs, token and signature change every time, so I can't hardcode them. 
+<p>Okay, the URL has something that looks like an album ID, some token and signature.
+Downloading different albums gives different IDs, token and signature change every time, so I can't hardcode them.
 From my previous encounters with Bandcamp, I know that it stores album information in a <code>script</code> element with the <code>data-tralbum</code> attribute, which contains JSON-encoded album data, so let's see if there is a free download link there somewhere:</p>
 
 <pre><code>{
@@ -147,7 +153,7 @@ From my previous encounters with Bandcamp, I know that it stores album informati
 </code></pre>
 
 <p>And surely there is the <code>freeDownloadPage</code> property.
-Now I know how to get to an album download page, but how do I get the actual ZIP archive URL from it? 
+Now I know how to get to an album download page, but how do I get the actual ZIP archive URL from it?
 Let's open source code and start digging.
 Again, there is a <code>script</code> element on the page, called <code>pagedata</code> with something JSON-encoded in its <code>data-blob</code> attribute.
 The content of this attribute is quite long, so let's focus only on this part:</p>
@@ -168,7 +174,8 @@ The content of this attribute is quite long, so let's focus only on this part:</
 }
 </code></pre>
 
-<p>It looks like a list of formats and URLs. Let's take one of them and try shoving it in the address bar:</p>
+<p>It looks like a list of formats and URLs.
+Let's take one of them and try shoving it in the address bar:</p>
 
 <p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/download-expired.png" alt="Download expired" title=""></p>
 
@@ -220,8 +227,9 @@ Interestingly enough, it's no longer JSON, but some Javascript code:</p>
 
 <p><code>retry_url</code> looks promising, though — and of course when I use it download starts.</p>
 
-<p>Bandcamp, you're truly amazing. 
-What's next? Should I build a tool that makes local backup of free albums from my wishlist? 
+<p>Bandcamp, you're truly amazing.
+What's next?
+Should I build a tool that makes local backup of free albums from my wishlist?
 Maybe I will, the whole download process seems to be easy enough to handle in a single bash script (if you speak <code>sed</code>):</p>
 
 <pre><code>#!/usr/bin/env bash
@@ -242,8 +250,7 @@ DL_STAT_URL="$(curl -sq "${FREE_DL_PAGE_URL}" \
 DL_URL=$(curl -sq "${DL_STAT_URL}" \
     | sed -nE -e 's/.+(https:\/\/popplers5.bandcamp.com\/download\/album\?enc=mp3-320&amp;fsig=[a-z0-9]+&amp;id=[0-9]+&amp;ts=[0-9]+.[0-9]+).+/\1/p'\
 )
-
-echo $DL_URL
+curl -o music.zip "${DL_URL}"
 </code></pre>
 
 <p>And I guess it's time for me to stop and say thank you for reading all the way to the end.

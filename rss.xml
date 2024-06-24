@@ -5,7 +5,7 @@
         <link>https://torunar.github.io</link>
         <description></description>
         <language>ru-RU</language>
-        <lastBuildDate>Mon, 24 Jun 2024 12:58:14 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 24 Jun 2024 15:37:09 +0000</lastBuildDate>
         <generator>Cider v5.0.0</generator>
         <item>
             <title>Reverse engineering Bandcamp downloads for love and piece</title>
@@ -18,11 +18,11 @@
 <p><em><strong>Disclaimer</strong>: It turned out to be much longer and personal than I originally expected.</em>
 <em>I decided to keep it this way, but if you came here only for programming stuff, you are more than welcome to <a href="#technical">skip to technical details</a>.</em></p>
 
-<p>Man, I love Bandcamp. 
-For me it's the only platform that sparkles joy of discovering, listening and buying music. 
-Compared to Spotify, Apple Music or YouTube, Bandcamp doesn't seem to have The Algorithm™. 
-You can subscribe to genres  and it will simply show random new releases mixed with not-so-new releases in your feed: some of the albums will be pure gold, others will be utter garbage. 
-You can follow artists for new hot stuff, but it will not affect your recommendation feed anyhow. 
+<p>Man, I love Bandcamp.
+For me it's the only platform that sparkles joy of discovering, listening and buying music.
+Compared to Spotify, Apple Music or YouTube, Bandcamp doesn't seem to have The Algorithm™.
+You can subscribe to genres  and it will simply show random new releases mixed with not-so-new releases in your feed: some of the albums will be pure gold, others will be utter garbage.
+You can follow artists for new hot stuff, but it will not affect your recommendation feed anyhow.
 Call me old fashioned, but I love the vibes it gives: even though new music is delivered straight to your browser, you still need to put in extra effort to find something that you really like and you can't predict where the journey takes you.</p>
 
 <p>It brings back memories of being a teenager during the mid-2000s in my hometown.
@@ -38,46 +38,52 @@ It was a gamble, and I enjoyed every single minute of it.</p>
 <p>I don't get the same feeling from Spotify where recommendations look like "You liked sugar, so you'll probably like maltitol and aspartame" and I hate Apple way too much to even consider the idea of buying their music service subscription.
 Subscriptions in general don't cut it for me: if I paid for music, I want it safely stored on my computer so I can copy it to my audio player (with hardware buttons) and listen it through wired headphones:</p>
 
-<p>And it's not just music: I feel deeply betrayed by Sony who banned one of my PlayStation accounts and won't allow me to buy games from one of the remaining two; 
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/player.jpg" alt="Player" title=""></p>
+
+<p>And it's not just music: I feel deeply betrayed by Sony who banned one of my PlayStation accounts and won't allow me to buy games from one of the remaining two;
 the possibility of losing access to Steam games I (don't) own also looks quite grim.
 This is the reason why I prefer GOG.com nowadays: I can download DRM-free installers to my computer and will be able to play Heroes of Might and Magic III even when society crumbles and the Internet goes dark.</p>
 
-<p>Considering my love for Bandcamp, it should not come as a surprise that I also enjoy fiddling with it programmatically. 
+<p>Considering my love for Bandcamp, it should not come as a surprise that I also enjoy fiddling with it programmatically.
 I call it fiddling for a simple reason: they don't provide official APIs for most of the things you can do on the site, but the site itself is built smart enough to allow me to craft these tools:</p>
 
-<p><strong><a href="https://github.com/torunar/bc-player">BC Player</a></strong>: an alternative Bandcamp music player that supports queuing (it also has a <a href="https://github.com/torunar/bc-player-helper">browser extension</a> to directly integrate with Bandcamp feed).</p>
+<p><strong><a href="https://github.com/torunar/bc-player">BC Player</a></strong>:
+an alternative Bandcamp music player that supports queuing (it also has a <a href="https://github.com/torunar/bc-player-helper">browser extension</a> to directly integrate with Bandcamp feed).</p>
 
-<p><strong><a href="https://github.com/torunar/bandcamp-liked-albums-widget">Liked albums widget</a></strong>: 
-Bandcamp doesn't have "likes" per se, but you can wishlist stuff — and hey, they use a heart icon for it, close enough. 
+<p><strong><a href="https://github.com/torunar/bandcamp-liked-albums-widget">Liked albums widget</a></strong>:
+Bandcamp doesn't have "likes" per se, but you can wishlist stuff — and hey, they use a heart icon for it, close enough.
 List of wishlisted albums is accessible through (non-documented, of course) search API, which allowed me to build a site where everyone can showcase a collection of releases they like.
 Here is mine, for example:</p>
 
-<iframe src="https://torunar.github.io/bandcamp-liked-albums-widget/?fan_id=3382834" style="min-height: 270px; margin-bottom: var(--uiGap);"></iframe>  
+<iframe src="https://torunar.github.io/bandcamp-liked-albums-widget/?fan_id=3382834" style="min-height: 270px; margin-bottom: var(--uiGap);"></iframe>
 
-<p><strong><a href="https://github.com/torunar/rss-feeds">Liked albums RSS</a></strong>: it's basically the same thing in the form of an RSS feed.
+<p><strong><a href="https://github.com/torunar/rss-feeds">Liked albums RSS</a></strong>:
+it's basically the same thing in the form of an RSS feed.
 I mostly follow blackgaze, math rock, synthwave and breakcore, so if you want to stay tuned with what catches my attention on Bandcamp, just add this URL in your RSS reader of choice: <a href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml">https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml</a>.</p>
 
-<p>I mentioned buying stuff from Bandcamp, but a lot of music there is available for free, you just go and download it. 
-Legally. No strings attached. They even let you choose the format and quality, isn't it nice?</p>
+<p>I mentioned buying stuff from Bandcamp, but a lot of music there is available for free, you just go and download it.
+Legally.
+No strings attached.
+They even let you choose the format and quality, isn't it nice?</p>
 
 <p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/format-selector.png" alt="Bandcamp download format selector" title=""></p>
 
-<p>And even if something is not available freely, there's of course a way to download it with, say, <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>. 
+<p>And even if something is not available freely, there's of course a way to download it with, say, <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>.
 Bandcamp understand it and openly admit that they're not going to spend development time and money to fix something that is not broken: <a href="https://bandcamp.com/help/audio_basics#steal">"I heard you can steal music on Bandcamp. What are you doing about this?"</a>.
 If you want to support a performer, just name your price (some albums have minimal price set, you can add extra on top) — the artist will get most of the money you paid, and you'll get a copy of the album to listen on your audio player (with hardware buttons!).</p>
 
 <p><span id="technical"></span>
-Which brings me to the topic of this post: how does downloading free (i.e., distributed without a lower price limit set) music work on Bandcamp? 
-What if I want to have a local backup of all the free releases from my wishlist? 
-Bandcamp don't seriously expect me to go through the manual download process for every single album, do they? 
+Which brings me to the topic of this post: how does downloading free (i.e., distributed without a lower price limit set) music work on Bandcamp?
+What if I want to have a local backup of all the free releases from my wishlist?
+Bandcamp don't seriously expect me to go through the manual download process for every single album, do they?
 Even if they do, I'm pretty sure there is a way to work it around.
 Let's go to a <a href="https://sugarwounds.bandcamp.com/album/mechanical-friends-remastered">free album page</a>, ask for a download and see where Bandcamp redirect me:</p>
 
 <pre><code>https://bandcamp.com/download?id=472457604&amp;ts=1719170366.294537336&amp;tsig=5e1411c3cc4ffe2b0c02b31ffb0e60de&amp;type=album
 </code></pre>
 
-<p>Okay, the URL has something that looks like an album ID, some token and signature. 
-Downloading different albums gives different IDs, token and signature change every time, so I can't hardcode them. 
+<p>Okay, the URL has something that looks like an album ID, some token and signature.
+Downloading different albums gives different IDs, token and signature change every time, so I can't hardcode them.
 From my previous encounters with Bandcamp, I know that it stores album information in a <code>script</code> element with the <code>data-tralbum</code> attribute, which contains JSON-encoded album data, so let's see if there is a free download link there somewhere:</p>
 
 <pre><code>{
@@ -124,7 +130,7 @@ From my previous encounters with Bandcamp, I know that it stores album informati
 </code></pre>
 
 <p>And surely there is the <code>freeDownloadPage</code> property.
-Now I know how to get to an album download page, but how do I get the actual ZIP archive URL from it? 
+Now I know how to get to an album download page, but how do I get the actual ZIP archive URL from it?
 Let's open source code and start digging.
 Again, there is a <code>script</code> element on the page, called <code>pagedata</code> with something JSON-encoded in its <code>data-blob</code> attribute.
 The content of this attribute is quite long, so let's focus only on this part:</p>
@@ -145,7 +151,8 @@ The content of this attribute is quite long, so let's focus only on this part:</
 }
 </code></pre>
 
-<p>It looks like a list of formats and URLs. Let's take one of them and try shoving it in the address bar:</p>
+<p>It looks like a list of formats and URLs.
+Let's take one of them and try shoving it in the address bar:</p>
 
 <p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/download-expired.png" alt="Download expired" title=""></p>
 
@@ -197,8 +204,9 @@ Interestingly enough, it's no longer JSON, but some Javascript code:</p>
 
 <p><code>retry_url</code> looks promising, though — and of course when I use it download starts.</p>
 
-<p>Bandcamp, you're truly amazing. 
-What's next? Should I build a tool that makes local backup of free albums from my wishlist? 
+<p>Bandcamp, you're truly amazing.
+What's next?
+Should I build a tool that makes local backup of free albums from my wishlist?
 Maybe I will, the whole download process seems to be easy enough to handle in a single bash script (if you speak <code>sed</code>):</p>
 
 <pre><code>#!/usr/bin/env bash
@@ -219,56 +227,12 @@ DL_STAT_URL="$(curl -sq "${FREE_DL_PAGE_URL}" \
 DL_URL=$(curl -sq "${DL_STAT_URL}" \
     | sed -nE -e 's/.+(https:\/\/popplers5.bandcamp.com\/download\/album\?enc=mp3-320&amp;fsig=[a-z0-9]+&amp;id=[0-9]+&amp;ts=[0-9]+.[0-9]+).+/\1/p'\
 )
-
-echo $DL_URL
+curl -o music.zip "${DL_URL}"
 </code></pre>
 
 <p>And I guess it's time for me to stop and say thank you for reading all the way to the end.
 I'll be back with other technical shenanigans any time soon, stay tuned!</p>]]></description>
             <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
-        </item>
-        <item>
-            <title>Чего там по винилу? Отчет за февраль 2024</title>
-            <link>https://torunar.github.io/2024/02/29/vinyl-report/</link>
-            <guid>https://torunar.github.io/2024/02/29/vinyl-report/</guid>
-            <description><![CDATA[
-<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/cover.png" alt="" title=""></p>
-<h2>Молчат дома — С крыш наших домов</h2>
-
-<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/molchat-doma-s-krysh-nashyh-domov.jpg" alt="" title=""></p>
-
-<p>«Молчат дома» были если не последней, то уж точно не первой группой, которую я ожидал найти в продаже в местных магазинах с пластинками.</p>
-
-<p>Из плюсов: в комплекте с пластинкой оказался купон на скачку его же во FLAC.
-Из минусов: пластинка то ли отпечатана очень дешево, то ли производили ее в самом пыльном помещении на свете, потому только после нескольких прослушиваний с регулярной очисткой щеткой она перестала скипать и заедать.
-Первую купленную пластинку я даже вернул в магазин, думая, что это брак, но точно такие же проблемы всплыли и у копии, которую я взял на замену.</p>
-
-<h2>Katatonia — Brave Murder Day</h2>
-
-<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/katatonia-brave-murder-day.jpg" alt="" title=""></p>
-
-<p>Когда-нибудь настанет день, когда из этой рубрики пропадут пластинки Katatonia...
-Но этот день не сегодня!</p>
-
-<p>«Опять птицы эти дохлые, что у Katatonia за фиксация на них», — ворчит Машуля, а я заряжаю в проигрыватель альбом, названный по первым трем трекам с него: Brave, Murder и Day.</p>
-
-<p>Фан-факт: это единственный полноформатник Katatonia, где на вокале выступает Микаэль Окерфельдт из легендарной группы Opeth, потому что у Йонаса Ренксе были проблемы со связками и орать в микрофон как дикая свинья он не мог.
-Вообще у Opeth, Katatonia, October Tide и Bloodbath давнее и плотное сотрудничество, музыканты из этих групп умудрились переиграть и переездить в туры с другими коллективами.
-Такая вот шведская музыкальная коммуналка.</p>
-
-<h2>Morphine — Good</h2>
-
-<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/morphine-good.jpg" alt="" title=""></p>
-
-<p>С группой Morphine я знаком примерно с того момента, как впервые взял в руки бас, то есть уже около 15 лет.
-Поэтому неудивительно, что я планирую рано или поздно собрать все их записи.</p>
-
-<p>Марк Сэндман долгое время был главным музыкантом, на которого я равнялся, именно его опыт вдохновлял меня на самые дикие эксперименты с инструментом, техниками игры и записи.
-Очевидно, я не достиг и малой части того, что он успел сделать за свою короткую жизнь, но это и не важно, главное, что мне было весело.
-Я верю, что Morphine — это музыка, доступная всем и способная привлечь любого, поэтому рекомендую вам это замечательное видео от Александра Тобольского с канала «Лонгплей»:</p>
-
-<iframe src="https://www.youtube-nocookie.com/embed/CN6Rwvp7q7U?si=T8_sC46rNqfNKml0"></iframe>]]></description>
-            <pubDate>Thu, 29 Feb 2024 00:00:00 +0000</pubDate>
         </item>
         <item>
             <title>Чего там по винилу? Отчет за март 2024</title>
@@ -319,42 +283,6 @@ I'll be back with other technical shenanigans any time soon, stay tuned!</p>]]><
 
 <p><em>P.S.: Ставь лайк, если оставлял на басу всего две струны, чтобы играть Thursday слайдом как Марк Сэндман.</em></p>]]></description>
             <pubDate>Tue, 26 Mar 2024 00:00:00 +0000</pubDate>
-        </item>
-        <item>
-            <title>У-вэй от мира разработки</title>
-            <link>https://torunar.github.io/2023/12/14/wu-wei/</link>
-            <guid>https://torunar.github.io/2023/12/14/wu-wei/</guid>
-            <description><![CDATA[
-<blockquote>
-  <p>The best code is no code at all.</p>
-</blockquote>
-
-<p><cite>Jeff Atwood, Effective Programming: More Than Writing Code</cite></p>
-<p>Это и похожие высказывания можно встретить в различных сборниках программисткой мудрости: мол, самый лучший код — это код, который ни ты, ни твоя команда, ни рандомный чел из интернета не написал. Эту цитату любят приводить в статьях о чистом коде, подразумевая под этим следование лучшим практикам, принципам, и фреймворкам разработки (SOLID, DDD и прочим КГ/АМ). Мол, не наваливай хурмы в код, пиши чисто и минималистично — и будет тебе в жизни счастье, не будешь сопровождать лишнего, будет твоя система подобна золотому храму, а сам ты в своем познании настолько преисполнишься, будто бы уже сто триллионов миллиардов лет проживаешь на триллионах и триллионах таких же планет, как эта Земля.</p>
-
-<p>Подобный подход понятен, но если взять все пулл-реквесты, которые прошли через меня за последние два года, самое большое удовольствие я испытываю, глядя на этих красавцев:</p>
-
-<p><span class="gallery-2">
-<img src="https://torunar.github.io/2023/12/14/wu-wei/img/01.png" alt="" title="">
-<img src="https://torunar.github.io/2023/12/14/wu-wei/img/02.png" alt="" title="">
-<img src="https://torunar.github.io/2023/12/14/wu-wei/img/03.png" alt="" title="">
-<img src="https://torunar.github.io/2023/12/14/wu-wei/img/04.png" alt="" title="">
-</span></p>
-
-<p>Каждое такое изменение рассказывает одну и ту же историю: что-то утратило свою актуальность и было удалено. Кто-то сел, посмотрел на сделанную им работу и сказал: «Мне это больше не нужно, оно идет под нож». Этот процесс очень хорошо резонирует с мыслью, которую я озвучивал когда-то в Твиттере:</p>
-
-<p><img src="https://torunar.github.io/2023/12/14/wu-wei/img/05.png" alt="" title=""></p>
-
-<p>Когда этот самый Твиттер поменял правила работы с их API, я просто пошел и удалил свою утилиту для архивирования аккаунтов. Да, я потратил несколько недель на ее создание, но я знал, что не буду ее обновлять и поддерживать, good riddance. Когда я понял, что мне уже не так интересно разбираться с особенностями сервиса Fly.io, я удалил почти законченный сервис-сидбокс. Мне стало скучно, а значит я уже вряд ли вернусь к этому проекту. С Гитхаба долой, из сердца вон.</p>
-
-<p>Разработчики, вы молодцы и лапочки, вы самые обучающиеся и развивающиеся, вы художники и <strong>создатели</strong>, но не забывайте, что на программировании свет клином не сошелся. Жизнь не сводится к количеству строк кода, звездочкам на Гитхабе или цифрам на банковском счете.</p>
-
-<p>Миру не нужно больше программ, миру нужны программы, которые действительно работают. <br>
-Миру не нужно больше компьютеров, миру нужны компьютеры, которые справляются с новыми задачами в их текущей конфигурации. <br>
-Миру не нужно больше IT-стартапов, миру нужно решать реальные задачи.</p>
-
-<p>Начни свой день не с реализации новой подсистемы по TDD, а с того, чтобы дропнуть тысячу-другую строк кода, которые не нужны. Удаление кода — это и есть у-вэй от мира разработки.</p>]]></description>
-            <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
         </item>
         <item>
             <title>Мы сделали это, профессор! Итоги 2023 года</title>
@@ -435,6 +363,231 @@ I'll be back with other technical shenanigans any time soon, stay tuned!</p>]]><
 
 <p>Оставайтесь тунцов, земляне! Увидимся в следующем году.</p>]]></description>
             <pubDate>Sun, 31 Dec 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>Реверс-инжиниринг загрузок с Bandcamp во имя любви и мира</title>
+            <link>https://torunar.github.io/2024/06/24/bandcamp-downloads/</link>
+            <guid>https://torunar.github.io/2024/06/24/bandcamp-downloads/</guid>
+            <description><![CDATA[
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads/../bandcamp-downloads-en/img/cover.png" alt="Combination of cUrl and Bandcamp logos" title=""></p>
+<p><em><strong>Ахтунг</strong>: Этот пост вышел куда длиннее и запутаннее, чем я изначально планировал.</em>
+<em>Поскольку это все-таки мой блог, то я решил оставить все, как есть, но если вам интересны только технические детали, то <a href="#technical">до них буквально один клик</a>.</em></p>
+
+<p>Ух, как же я люблю Bandcamp.
+Ни одна музыкальная платформа не дарит мне такой радости от поиска, прослушивания и покупки музыки.
+На первый взгляд, у Bandcamp нет никакого Алгоритма™, как у Spotify, Apple Music или YouTube.
+Хочешь — подписывайся на отдельные жанры, и тебе в ленту будет приносить новые и не очень релизы: будет и годнота, и мусор.
+На отдельных музыкантов тоже можно подписываться, но я не заметил, чтобы они хоть как-то влияли на выдачу в ленте.
+В современном мире за такое принято закидывать говной, но мне такой подход прям заходит: вроде бы и вся музыка буквально на кончиках пальцев, но чтобы найти что-то топовое, все равно нужно перерыть и переслушать кучу всего.</p>
+
+<p>Bandcamp меня буквально в середину 00-х переносит.
+Был у нас в городе один магазинчик для неформалов, который торговал всяким (преимущественно поддельным) мерчем и <a href="https://knowyourmeme.com/memes/three-wolf-moon">футболками с волками</a>.
+Я там мог часам зависать, залипая в витрины на футболки, которые все равно не мог себе позволить, и диски с кассетами, многие их которых висели в продаже годами.
+К счастью, продавцы относились ко всяким лодырям нейтрально — наверное, понимали, что рано или поздно лодырь накопит денег с обедов и что-нибудь да купит.</p>
+
+<p>Покупка музыки там каждый раз была лотереей: нормального интернета в ту пору у меня еще не было, совета спросить было не у кого, вот и приходилось ограничиваться инфой из Википедии да отрывочными сведениями от одноклассников.
+Так что стратегия была каждый раз одна и та же: пялишься на обложки, пока глаза не пересохнут, спрашиваешь чего-нибудь у скучающей томной девицы за прилавком и выбираешь в итоге почти пальцем в небо.
+Иной раз притащишь домой диск Lacrimosa и влюбишься в них на всю жизнь, а порой возьмешь Children of Bodom на кассете да так больше одного раза ее и не послушаешь.
+Не стоит недооценивать силу азарта!</p>
+
+<p>Spotify со своими рекомендациями выглядит жалко и пресно: "Ой, вам понравился сахар, возможно, вам понравится стевия", а Apple вообще нахуй могут пойти — я ненавижу эту компанию и все, что они делают, слишком сильно, чтобы даже задумываться о покупке чего-либо от них когда-либо.
+К подписочным сервисам я отношусь с недоверием и недовольством (и это в 2к24-м-то!): как по мне, если я уже заплатил за музыку, у меня должна быть возможность ее себе на компухтер сохранить, в Winamp'е послушать, а потом закинуть на внешний аудиоплеер (с кнопочками!), воткнуть наушники в него и пойти куда-нибудь по делам:</p>
+
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads/../bandcamp-downloads-en/img/player.jpg" alt="Player" title=""></p>
+
+<p>И не в одной музыке дело: Sony жоско меня предали, забанив мой шведский PSN-аккаунт, а с русского аккаунта сейчас, понятное дело, игры не купить;
+вероятность когда-то потерять доступ ко всем играм, которыми я (не) владею в Steam, тоже особой уверенности в завтрашнем дне не приносит.
+Поэтому нынче, если я что и покупаю, то делаю это на GOG.com: они дают скачать отдельный установщик, так что без третьих Героев я не останусь даже в случае краха цивилизации (и да, я реально бэкаплю локально инсталлеры из GOG).</p>
+
+<p>С учетом моей любви к Bandcamp, ничего удивительного, что я частенько пилю какие-то хаки и костыли вокруг него.
+Увы, Bandcamp никаких публичных API для большей части функциональности не дают, но даже так я смог запилить ряд тулзов, которыми пользуюсь регулярно:</p>
+
+<p><strong><a href="https://github.com/torunar/bc-player">BC Player</a></strong>:
+альтернативный плеер, который умеет очереди (и <a href="https://github.com/torunar/bc-player-helper">расширение для браузера</a> для прямой интеграции с лентой).</p>
+
+<p><strong><a href="https://github.com/torunar/bandcamp-liked-albums-widget">Виджет с лайками</a></strong>:
+как таковых, лайков на Bandcamp нет, есть только вишлист, но они сами решили использовать иконку с сердечком для него — close enough, как говорится.
+Список лайков можно вытащить через (незадокументированное, конечно же) API для поиска, поэтому я смог запилить одностраничник, где можно хвастаться своим ужасным музыкальным вкусом.
+Я вот хвастаюсь, например:</p>
+
+<iframe src="https://torunar.github.io/bandcamp-liked-albums-widget/?fan_id=3382834" style="min-height: 270px; margin-bottom: var(--uiGap);"></iframe>
+
+<p><strong><a href="https://github.com/torunar/rss-feeds">RSS с лайками</a></strong>:
+по сути, то же самое, но в форме RSS-ленты.
+Я в основном слушаю блэкгейз, матрок, синтвейв и брейккор, так что если есть желание узнавать, чего мне там понравилось, раньше, чем я напишу об этом в своем <a href="https://t.me/misha_talks">Телеграм-канале</a>, то вот ссылка на ленту: <a href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml">https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml</a>.</p>
+
+<p>Я уже упоминал, что на Bandcamp можно покупать музыку, но огромное ее количество доступно бесплатно.
+Легально.
+Без регистрации, без СМС.
+Даже формат для скачивания можно выбрать, ну не лапочки ли?</p>
+
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads/../bandcamp-downloads-en/img/format-selector.png" alt="Bandcamp download format selector" title=""></p>
+
+<p>И даже если у чего-то нет бесплатной версии, всегда есть <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>.
+Bandcamp понимают, что у кого есть желание пиратить, спиратит обязательно, и поэтому они не чинят то, что не сломано: <a href="https://bandcamp.com/help/audio_basics#steal">"I heard you can steal music on Bandcamp. What are you doing about this?"</a>.
+Тут все остается на усмотрение пользователя: хочешь поддержать исполнителя — давай, сколько дашь, музыканты с твоей покупки получат большую часть денег, а ты получишь свой релиз, чтобы слушать его на внешнем аудиоплеере (с кнопочками!).</p>
+
+<p><span id="technical"></span>
+И тут-то мы и добрались до сути: а как вообще устроено скачивание бесплатных (т.е. без минимальной цены) релизов на Bandcamp?
+Что, если я хочу локальную копию <strong>всего</strong> своего списка лайков?
+Не думают же они, что я буду каждый альбом отдельно качать?
+Даже так, наверняка это можно как-то обойти.
+Так что идем на страницу <a href="https://sugarwounds.bandcamp.com/album/mechanical-friends-remastered">какого-нибудь бесплатного альбома</a>, выбираем бесплатную загрузку и смотрим, куда нас редиректит:</p>
+
+<pre><code>https://bandcamp.com/download?id=472457604&amp;ts=1719170366.294537336&amp;tsig=5e1411c3cc4ffe2b0c02b31ffb0e60de&amp;type=album
+</code></pre>
+
+<p>Так, в URL'е есть ID альбома, какие-то токен и подпись.
+У разных альбомов разные ID, а токен и подпись вообще каждый раз меняются, их захардкодить нигде не получится.
+Со времен работы над BC Player, я знаю, что информация об альбоме хранится в элементе <code>script</code> с атрибутом <code>data-tralbum</code>, где в формате JSON куча всего про альбом, может и ссылка на скачивание там найдется?</p>
+
+<pre><code>{
+  "for the curious": "https://bandcamp.com/help/audio_basics#steal https://bandcamp.com/terms_of_use",
+  "current": "/** skipped **/",
+  "preorder_count": null,
+  "hasAudio": true,
+  "art_id": 3553041759,
+  "packages": null,
+  "defaultPrice": 7.0,
+  "freeDownloadPage": "https://bandcamp.com/download?id=472457604&amp;ts=1719170366.294537336&amp;tsig=5e1411c3cc4ffe2b0c02b31ffb0e60de&amp;type=album",
+  "FREE": 1,
+  "PAID": 2,
+  "artist": "Sugar Wounds",
+  "item_type": "album",
+  "id": 472457604,
+  "last_subscription_item": null,
+  "has_discounts": false,
+  "is_bonus": null,
+  "play_cap_data": null,
+  "client_id_sig": null,
+  "is_purchased": false,
+  "items_purchased": {
+    "packages": {},
+    "bundles": {},
+    "crowdfunding_campaign": {}
+  },
+  "is_private_stream": null,
+  "is_band_member": null,
+  "licensed_version_ids": null,
+  "package_associated_license_id": null,
+  "has_video": null,
+  "tralbum_subscriber_only": false,
+  "featured_track_id": 4234552772,
+  "initial_track_num": null,
+  "is_preorder": false,
+  "album_is_preorder": false,
+  "album_release_date": "24 May 2024 08:11:31 GMT",
+  "trackinfo": "/** skipped **/",
+  "playing_from": "album page",
+  "url": "https://sugarwounds.bandcamp.com/album/mechanical-friends-remastered",
+  "use_expando_lyrics": false
+}
+</code></pre>
+
+<p>Ну да, вот она, в свойстве <code>freeDownloadPage</code>.
+Итак, как попасть на страницу загрузки — понятно, но как забрать желанный ZIP архив с файликами?
+Открываем исходный код страницы и начинаем копать.
+Находим <code>script</code> с ID <code>pagedata</code>, у которого в <code>data-blob</code> очередная JSON-простыня.
+Нам оттуда мало, что нужно, кроме вот этой части:</p>
+
+<pre><code>{
+  "digital_items": [
+    {
+      "downloads": {
+        "mp3-320": {
+          "size_mb": "63.3MB",
+          "description": "MP3 320",
+          "encoding_name": "mp3-320",
+          "url": "https://popplers5.bandcamp.com/download/album?enc=mp3-320&amp;fsig=00b08a0ef60ff8f0a9b9e4970c0ba43b&amp;id=472457604&amp;ts=1719170609.0"
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+
+<p>Выглядит как список форматов из селектора с URL'ами для скачивания.
+Но вот, что будет, если по этому URL перейти:</p>
+
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads/../bandcamp-downloads-en/img/download-expired.png" alt="Download expired" title=""></p>
+
+<p>Блин.
+Уже пора через сетевой монитор дебажить, что откуда качается?
+Потыкав немного в страницу загрузки, я выяснил, что эти адреса — не для загрузки, а для предоставления информации <strong>о загрузке</strong>.
+Например, выбрав формат MP3-320, я вижу, что сайт запрашивает информацию с немного другого адреса, нежели в pagedata:</p>
+
+<pre><code>https://popplers5.bandcamp.com/statdownload/album?enc=mp3-320&amp;fsig=d0b8d24621d44e47db70e80af71eb6b7&amp;id=472457604&amp;ts=1719170610.3045844466&amp;.rand=1118817395515&amp;.vrs=1
+</code></pre>
+
+<ul>
+<li><code>download</code> превратился в <code>statdownload</code>.</li>
+<li><code>ts</code> заканчивается не на <code>.0</code>, а на какое-то рандомное число.</li>
+<li>Добавился параметр <code>&amp;.rand</code> с, опять же, рандомным значением.</li>
+<li><code>&amp;.vrs=1</code> в конце URL.</li>
+</ul>
+
+<p>В ответе же прилетает:</p>
+
+<pre><code>{
+  "result": "ok",
+  "url": "popplers5.bandcamp.com/statdownload/album?enc=mp3-320&amp;fsig=d0b8d24621d44e47db70e80af71eb6b7&amp;id=472457604&amp;ts=1719170610.3045844466&amp;.rand=1118817395515&amp;.vrs=1",
+  "host": "scruffycentral-b4gx-2",
+  "download_url": "https://p4.bcbits.com/download/album/1be668409c340ce30382a4b172b1ba553/mp3-320/472457604?fsig=67b47364b6ff165b09c0df8d994c7384&amp;id=472457604&amp;ts=1719171791.1334808993&amp;token=1719776591_abb599a8c126fc1a86667adcab20b1649975e991"
+}
+</code></pre>
+
+<p>И куда же ведет <code>download_url</code>?
+На скачку желанного ZIP архива с бесплатной (легально, без регистрации, без СМС) музыкой:</p>
+
+<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads/../bandcamp-downloads-en/img/free-music.png" alt="lol-limeware" title=""></p>
+
+<p>Проблема лишь в том, что я понятия не имею, как вычисляются "хвост" <code>ts</code> и параметр <code>.rand</code>.
+Что, если туда закинуть реально рандомные значения?
+В ответ приходит уже не JSON, а вполне себе Javascript:</p>
+
+<pre><code>if (window.Downloads) {
+    Downloads.statResult({
+        "result": "err",
+        "retry_url": "https://popplers5.bandcamp.com/download/album?enc=mp3-320&amp;fsig=68a6ccd613ace8850db6e42258de8625&amp;id=472457604&amp;ts=1719217640.3278671238",
+        "errortype": "ExpiredFreeDownloadError",
+        "date": "2024-06-24 08:27:20 UTC",
+        "url": "popplers5.bandcamp.com/statdownload/album?enc=mp3-320&amp;fsig=23be1fba7f0f83c6f725ed9cbcae4275&amp;id=472457604&amp;ts=1719217626.0&amp;.rand=1719217626000&amp;.vrs=1",
+        "host": "scruffycentral-b4gx-1"
+    })
+};
+</code></pre>
+
+<p>И <code>retry_url</code> (как удобно) как раз ведет на скачивание.</p>
+
+<p>Bandcamp, пожалуйста, не меняйся.
+Что дальше?
+Пилить тулзу для бэкапа всего вишлиста?
+Можно и так, весь описанный выше процесс помещается в один скрипт на bash (если вы понимаете <code>sed</code>):</p>
+
+<pre><code>#!/usr/bin/env bash
+
+ITEM_URL="${1}"
+
+FREE_DL_PAGE_URL=$(curl -sq "${ITEM_URL}" \
+    | sed -nE -e 's/^.+(https:\/\/bandcamp.com\/download\?id=[0-9]+&amp;amp;ts=[0-9]+.[0-9]+&amp;amp;tsig=[a-z0-9]+&amp;amp;type=album).+/\1/p' \
+    | sed 's/&amp;amp;/\&amp;/g' \
+)
+
+DL_STAT_URL="$(curl -sq "${FREE_DL_PAGE_URL}" \
+    | sed -nE -e 's/^.+(https:\/\/popplers5.bandcamp.com\/download\/album\?enc=mp3-320&amp;amp;fsig=[a-z0-9]+&amp;amp;id=[0-9]+&amp;amp;ts=[0-9]+.0).+/\1/p' \
+    | sed 's/&amp;amp;/\&amp;/g' \
+    | sed 's/\/download\//\/statdownload\//' \
+)&amp;.rand=$(date +%s)000&amp;.vrs=1"
+
+DL_URL=$(curl -sq "${DL_STAT_URL}" \
+    | sed -nE -e 's/.+(https:\/\/popplers5.bandcamp.com\/download\/album\?enc=mp3-320&amp;fsig=[a-z0-9]+&amp;id=[0-9]+&amp;ts=[0-9]+.[0-9]+).+/\1/p'\
+)
+curl -o music.zip "${DL_URL}"
+</code></pre>
+
+<p>И если вы дочитали этот пост до конца, вы — настоящий герой.
+Я непременно вернусь с очередной партией отвратительных хаков, а до той поры — оставайтесь тунцов!</p>]]></description>
+            <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
         </item>
         <item>
             <title>Чего там по винилу? Отчет за май 2024</title>
@@ -578,105 +731,6 @@ Tubular Bells Олдфилда я люблю с той поры, как услы
             <pubDate>Thu, 28 Dec 2023 00:00:00 +0000</pubDate>
         </item>
         <item>
-            <title>Чего там по винилу? Отчет за ноябрь 2023</title>
-            <link>https://torunar.github.io/2023/11/24/vinyl-report/</link>
-            <guid>https://torunar.github.io/2023/11/24/vinyl-report/</guid>
-            <description><![CDATA[
-<p><img src="https://torunar.github.io/2023/11/24/vinyl-report/img/cover.png" alt="" title=""></p>
-<h2>Paul Giovanni — Wicker Man</h2>
-
-<p><span class="gallery-2">
-<img src="https://torunar.github.io/2023/11/24/vinyl-report/img/01.jpg" alt="" title="">
-<img src="https://torunar.github.io/2023/11/24/vinyl-report/img/02.jpg" alt="" title="">
-</span></p>
-
-<p>&laquo;Плетеный человек&raquo; 1973-го года — без преувеличения мой любимый хоррор и вряд ли что-то сможет сместить его с этого пьедестала.
-Когда я увидел его впервые несколько лет назад, я пересмотрел его три раза с разницей в день.
-Густая атмосфера детективной истории, разворачивающейся на удаленном острове, мрачные каменные утесы Шотландии, дикие языческие ритуалы и музыка — сочетание всех этих элементов дарило причудливый и захватывающий опыт.</p>
-
-<p>Поэтому, когда я увидел в продаже пластинку с саундтреком, вопрос брать или не брать даже не стоял.</p>
-
-<p>На внутренней стороне конверта изложена судьба многострадального фильма: проблемы с производством, сумбурный и во многом провальный релиз и, наконец, ренессанс, вызванный повторными прокатами и перевыпусками, заслуженный успех и культовый статус.
-Оттуда же можно узнать, что Пол Джованни, композитор саундтрека, не был профессиональным композитором, как и музыканты-исполнители, поэтому очень многое делалось на коленке и придумывалось на месте, возможно именно поэтому саундтрек и вышел таким самобытным.</p>
-
-<h2>Katatonia — For Funerals To Come...</h2>
-
-<p><img src="https://torunar.github.io/2023/11/24/vinyl-report/img/03.jpg" alt="" title=""></p>
-
-<p>EP, название которого, если верить вкладышу, чуть не стало пророческим для Katatonia: на тот момент у них был всего один полноформатник <a href="https://torunar.github.io/2023/10/07/vinyl-report/">Dance of December Souls</a>, сама группа понятия не имела, куда двигаться дальше, а внутри не было даже согласия о том, в каком жанре делать музыку.</p>
-
-<p>Все шло то ли к распаду, то ли к длительному простою, но в итоге в группе произошли перестановки, на вокал пришел Микаель Окерфельдт из Opeth, и уже в 1996-м году Katatonia выпустила свой следующий альбом Brave Murder Day (уже лежит в вишлисте и ждет своего времени).</p>
-
-<p>Совершенно неожиданно заказанная пластинка оказалась переизданием 2011-го года, где к четырем оригинальным трекам были добавлены записанные в середине девяностых треки Black Erotica и Love of the Swan, в результате EP разросся с изначальных 18 минут до полноценного 35-минутного альбома.</p>
-
-<h2>Dire Straits — Lover Over Gold</h2>
-
-<p><img src="https://torunar.github.io/2023/11/24/vinyl-report/img/04.jpg" alt="" title=""></p>
-
-<p>Формально именно с этого альбома, а конкретно с трека Telegraph Road два года назад и начался мой канал: <a href="https://t.me/misha_talks/3">t.me/misha_talks/3</a>, поэтому мимо него пройти было нельзя.</p>
-
-<p>Пластинка куплена в местном магазине с б/у записями, причем Lover Over Gold лежала аж в нескольких ящиках, и цены на пластинку в разном состоянии колебались от 20 до 130 крон. Решил взять что-то посередине и не прогадал: конверт почти уничтожен, но пластинка внутри в хорошем состоянии, без повреждений и стариковского песка (хотя казалось бы).</p>]]></description>
-            <pubDate>Fri, 24 Nov 2023 00:00:00 +0000</pubDate>
-        </item>
-        <item>
-            <title>Чего там по винилу? Отчет за апрель 2024</title>
-            <link>https://torunar.github.io/2024/04/29/vinyl-report/</link>
-            <guid>https://torunar.github.io/2024/04/29/vinyl-report/</guid>
-            <description><![CDATA[
-<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/cover.png" alt="" title=""></p>
-<h2>Tiamat — Judas Christ</h2>
-
-<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/tiamat-judas-christ.jpg" alt="" title=""></p>
-
-<p>В <a href="https://torunar.github.io/2024/03/26/vinyl-report/">прошлый раз</a> я уже рассказывал, что зарекся брать Tiamat на красном виниле из-за его пыльности и в целом так себе качества печати.
-И что же вы думаете? 
-Я сделал это снова: не доглядел и заказал случайно какое-то там лимитированное издание на красном тяжелом виниле.</p>
-
-<p>Возможно, дело в том, что <a href="https://imusic.se">iMusic</a>, на котором я теперь беру большую часть записей, не всегда пишут, какое именно издание ты покупаешь, и могут иногда положить mega deluxe limited expanded early adopter yoba edition вместо обычного (к сожалению, бывает и наоборот).
-А возможно, я просто читаю жопой.</p>
-
-<p>Со звуком на этой пластинке все уже окей, пыли в пакет тоже никто не насыпал. 
-Подсудимый оправдан, получается, стоит сменить гнев на милость и взять последний альбом, который я хотел, тоже на красном виниле.</p>
-
-<h2>Katatonia — Discouraged Ones</h2>
-
-<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/katatonia-discouraged-ones.jpg" alt="" title=""></p>
-
-<p>Как я упоминал <a href="https://torunar.github.io/2024/02/29/vinyl-report/">ранее</a>, предыдущий по хронологии альбом Katatonia — Brave Murder Day, — вышел не без проблем.
-Вокалист Йонас Ренксе из-за болезни уже не мог орать дурниной, вокал для альбома делал Микаэль Окерфельдт из Opeth, но это не помешало группе продолжить свое существование.</p>
-
-<p>Discouraged Ones — это первый альбом переходного периода, и на нем все не так: стиль поменялся, музыканты новые, какой делать звук — вообще не понятно, вокалист не освоился с непривычной манерой пения, и все это звучит очень грустно, суматошно и безысходно.
-Это сочетание делает альбом просто идеальным для/от мужской депрессии.
-Даже само название, «Приунывшие», — отражает состояние, когда все из рук валится, проблемы громоздятся одна на другую, ты понятия не имеешь, что делать дальше и имеет ли вообще смысл делать хоть что-то.</p>
-
-<p>Если вас спрашивают: «Как дела?», а ты отвечаешь: «Вроде нормально все», а потом <a href="https://www.youtube.com/watch?v=siAlDSZrtS0">чё-то раз и приуныл</a>, послушайте Discouraged Ones.
-Возможно, станет легче.</p>
-
-<p>Или нет.</p>
-
-<h2>The Prodigy — The Fat of the Land</h2>
-
-<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/the-prodigy-the-fat-of-the-land.jpg" alt="" title=""></p>
-
-<p>За очень многие вещи я берусь только потому, что в них есть великий мемный потенциал, и до сих пор это работает великолепно почти со всем: от литературы до видеоигр, от еды до одежды.</p>
-
-<p>Фильмы Дэвида Линча, книги Владимира Сорокина, норвежский блэк-метал, игры серии Yakuza — вокруг всего этого выстроена огромной силы мемная культура.
-Я заинтересовался ими из-за мемов, но в итоге начал их любить и ценить. 
-Как говорится, I came looking for copper and found gold.</p>
-
-<p>The Prodigy — еще один пример того, как великий мемный потенциал влияет на принимаемые решения: про эту группу и конкретно Кита Флинта я узнал раньше, чем слово «мем» вообще вошло в обиход.
-Клипы этой группы мы в школьные годы передавали друг другу на <strong>дисках с приколами</strong>, а 10-секундные зашакаленные рингтоны с Firestarter и Smack My Bitch Up пересылали по <s>ИК-порту</s> Bluetooth с телефона на телефон.</p>
-
-<p>А потом в один день я увидел обложку The Fat of the Land и прифигел: что может быть круче кислотно-оранжевого краба, шпарящего на всех парах?
-Только толпа таких же крабов на обложке Expanded Edition:</p>
-
-<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/the-prodigy-the-fat-of-the-land-expanded.jpg" alt="" title=""></p>
-
-<p>Лучше уже не будет, можно выключать. 
-К сожалению, расширенное издание выходило только на CD, приходится довольствоваться малым, так что пластинка с главными хитами отправляется в коллекцию.</p>]]></description>
-            <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>
-        </item>
-        <item>
             <title>Как Иван-дурак шведский учил</title>
             <link>https://torunar.github.io/2024/02/11/sfi/</link>
             <guid>https://torunar.github.io/2024/02/11/sfi/</guid>
@@ -793,6 +847,143 @@ Tubular Bells Олдфилда я люблю с той поры, как услы
 
 <p>Vi ses!  </p>]]></description>
             <pubDate>Sun, 11 Feb 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>Чего там по винилу? Отчет за февраль 2024</title>
+            <link>https://torunar.github.io/2024/02/29/vinyl-report/</link>
+            <guid>https://torunar.github.io/2024/02/29/vinyl-report/</guid>
+            <description><![CDATA[
+<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/cover.png" alt="" title=""></p>
+<h2>Молчат дома — С крыш наших домов</h2>
+
+<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/molchat-doma-s-krysh-nashyh-domov.jpg" alt="" title=""></p>
+
+<p>«Молчат дома» были если не последней, то уж точно не первой группой, которую я ожидал найти в продаже в местных магазинах с пластинками.</p>
+
+<p>Из плюсов: в комплекте с пластинкой оказался купон на скачку его же во FLAC.
+Из минусов: пластинка то ли отпечатана очень дешево, то ли производили ее в самом пыльном помещении на свете, потому только после нескольких прослушиваний с регулярной очисткой щеткой она перестала скипать и заедать.
+Первую купленную пластинку я даже вернул в магазин, думая, что это брак, но точно такие же проблемы всплыли и у копии, которую я взял на замену.</p>
+
+<h2>Katatonia — Brave Murder Day</h2>
+
+<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/katatonia-brave-murder-day.jpg" alt="" title=""></p>
+
+<p>Когда-нибудь настанет день, когда из этой рубрики пропадут пластинки Katatonia...
+Но этот день не сегодня!</p>
+
+<p>«Опять птицы эти дохлые, что у Katatonia за фиксация на них», — ворчит Машуля, а я заряжаю в проигрыватель альбом, названный по первым трем трекам с него: Brave, Murder и Day.</p>
+
+<p>Фан-факт: это единственный полноформатник Katatonia, где на вокале выступает Микаэль Окерфельдт из легендарной группы Opeth, потому что у Йонаса Ренксе были проблемы со связками и орать в микрофон как дикая свинья он не мог.
+Вообще у Opeth, Katatonia, October Tide и Bloodbath давнее и плотное сотрудничество, музыканты из этих групп умудрились переиграть и переездить в туры с другими коллективами.
+Такая вот шведская музыкальная коммуналка.</p>
+
+<h2>Morphine — Good</h2>
+
+<p><img src="https://torunar.github.io/2024/02/29/vinyl-report/img/morphine-good.jpg" alt="" title=""></p>
+
+<p>С группой Morphine я знаком примерно с того момента, как впервые взял в руки бас, то есть уже около 15 лет.
+Поэтому неудивительно, что я планирую рано или поздно собрать все их записи.</p>
+
+<p>Марк Сэндман долгое время был главным музыкантом, на которого я равнялся, именно его опыт вдохновлял меня на самые дикие эксперименты с инструментом, техниками игры и записи.
+Очевидно, я не достиг и малой части того, что он успел сделать за свою короткую жизнь, но это и не важно, главное, что мне было весело.
+Я верю, что Morphine — это музыка, доступная всем и способная привлечь любого, поэтому рекомендую вам это замечательное видео от Александра Тобольского с канала «Лонгплей»:</p>
+
+<iframe src="https://www.youtube-nocookie.com/embed/CN6Rwvp7q7U?si=T8_sC46rNqfNKml0"></iframe>]]></description>
+            <pubDate>Thu, 29 Feb 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>У-вэй от мира разработки</title>
+            <link>https://torunar.github.io/2023/12/14/wu-wei/</link>
+            <guid>https://torunar.github.io/2023/12/14/wu-wei/</guid>
+            <description><![CDATA[
+<blockquote>
+  <p>The best code is no code at all.</p>
+</blockquote>
+
+<p><cite>Jeff Atwood, Effective Programming: More Than Writing Code</cite></p>
+<p>Это и похожие высказывания можно встретить в различных сборниках программисткой мудрости: мол, самый лучший код — это код, который ни ты, ни твоя команда, ни рандомный чел из интернета не написал. Эту цитату любят приводить в статьях о чистом коде, подразумевая под этим следование лучшим практикам, принципам, и фреймворкам разработки (SOLID, DDD и прочим КГ/АМ). Мол, не наваливай хурмы в код, пиши чисто и минималистично — и будет тебе в жизни счастье, не будешь сопровождать лишнего, будет твоя система подобна золотому храму, а сам ты в своем познании настолько преисполнишься, будто бы уже сто триллионов миллиардов лет проживаешь на триллионах и триллионах таких же планет, как эта Земля.</p>
+
+<p>Подобный подход понятен, но если взять все пулл-реквесты, которые прошли через меня за последние два года, самое большое удовольствие я испытываю, глядя на этих красавцев:</p>
+
+<p><span class="gallery-2">
+<img src="https://torunar.github.io/2023/12/14/wu-wei/img/01.png" alt="" title="">
+<img src="https://torunar.github.io/2023/12/14/wu-wei/img/02.png" alt="" title="">
+<img src="https://torunar.github.io/2023/12/14/wu-wei/img/03.png" alt="" title="">
+<img src="https://torunar.github.io/2023/12/14/wu-wei/img/04.png" alt="" title="">
+</span></p>
+
+<p>Каждое такое изменение рассказывает одну и ту же историю: что-то утратило свою актуальность и было удалено. Кто-то сел, посмотрел на сделанную им работу и сказал: «Мне это больше не нужно, оно идет под нож». Этот процесс очень хорошо резонирует с мыслью, которую я озвучивал когда-то в Твиттере:</p>
+
+<p><img src="https://torunar.github.io/2023/12/14/wu-wei/img/05.png" alt="" title=""></p>
+
+<p>Когда этот самый Твиттер поменял правила работы с их API, я просто пошел и удалил свою утилиту для архивирования аккаунтов. Да, я потратил несколько недель на ее создание, но я знал, что не буду ее обновлять и поддерживать, good riddance. Когда я понял, что мне уже не так интересно разбираться с особенностями сервиса Fly.io, я удалил почти законченный сервис-сидбокс. Мне стало скучно, а значит я уже вряд ли вернусь к этому проекту. С Гитхаба долой, из сердца вон.</p>
+
+<p>Разработчики, вы молодцы и лапочки, вы самые обучающиеся и развивающиеся, вы художники и <strong>создатели</strong>, но не забывайте, что на программировании свет клином не сошелся. Жизнь не сводится к количеству строк кода, звездочкам на Гитхабе или цифрам на банковском счете.</p>
+
+<p>Миру не нужно больше программ, миру нужны программы, которые действительно работают. <br>
+Миру не нужно больше компьютеров, миру нужны компьютеры, которые справляются с новыми задачами в их текущей конфигурации. <br>
+Миру не нужно больше IT-стартапов, миру нужно решать реальные задачи.</p>
+
+<p>Начни свой день не с реализации новой подсистемы по TDD, а с того, чтобы дропнуть тысячу-другую строк кода, которые не нужны. Удаление кода — это и есть у-вэй от мира разработки.</p>]]></description>
+            <pubDate>Thu, 14 Dec 2023 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>Чего там по винилу? Отчет за апрель 2024</title>
+            <link>https://torunar.github.io/2024/04/29/vinyl-report/</link>
+            <guid>https://torunar.github.io/2024/04/29/vinyl-report/</guid>
+            <description><![CDATA[
+<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/cover.png" alt="" title=""></p>
+<h2>Tiamat — Judas Christ</h2>
+
+<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/tiamat-judas-christ.jpg" alt="" title=""></p>
+
+<p>В <a href="https://torunar.github.io/2024/03/26/vinyl-report/">прошлый раз</a> я уже рассказывал, что зарекся брать Tiamat на красном виниле из-за его пыльности и в целом так себе качества печати.
+И что же вы думаете? 
+Я сделал это снова: не доглядел и заказал случайно какое-то там лимитированное издание на красном тяжелом виниле.</p>
+
+<p>Возможно, дело в том, что <a href="https://imusic.se">iMusic</a>, на котором я теперь беру большую часть записей, не всегда пишут, какое именно издание ты покупаешь, и могут иногда положить mega deluxe limited expanded early adopter yoba edition вместо обычного (к сожалению, бывает и наоборот).
+А возможно, я просто читаю жопой.</p>
+
+<p>Со звуком на этой пластинке все уже окей, пыли в пакет тоже никто не насыпал. 
+Подсудимый оправдан, получается, стоит сменить гнев на милость и взять последний альбом, который я хотел, тоже на красном виниле.</p>
+
+<h2>Katatonia — Discouraged Ones</h2>
+
+<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/katatonia-discouraged-ones.jpg" alt="" title=""></p>
+
+<p>Как я упоминал <a href="https://torunar.github.io/2024/02/29/vinyl-report/">ранее</a>, предыдущий по хронологии альбом Katatonia — Brave Murder Day, — вышел не без проблем.
+Вокалист Йонас Ренксе из-за болезни уже не мог орать дурниной, вокал для альбома делал Микаэль Окерфельдт из Opeth, но это не помешало группе продолжить свое существование.</p>
+
+<p>Discouraged Ones — это первый альбом переходного периода, и на нем все не так: стиль поменялся, музыканты новые, какой делать звук — вообще не понятно, вокалист не освоился с непривычной манерой пения, и все это звучит очень грустно, суматошно и безысходно.
+Это сочетание делает альбом просто идеальным для/от мужской депрессии.
+Даже само название, «Приунывшие», — отражает состояние, когда все из рук валится, проблемы громоздятся одна на другую, ты понятия не имеешь, что делать дальше и имеет ли вообще смысл делать хоть что-то.</p>
+
+<p>Если вас спрашивают: «Как дела?», а ты отвечаешь: «Вроде нормально все», а потом <a href="https://www.youtube.com/watch?v=siAlDSZrtS0">чё-то раз и приуныл</a>, послушайте Discouraged Ones.
+Возможно, станет легче.</p>
+
+<p>Или нет.</p>
+
+<h2>The Prodigy — The Fat of the Land</h2>
+
+<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/the-prodigy-the-fat-of-the-land.jpg" alt="" title=""></p>
+
+<p>За очень многие вещи я берусь только потому, что в них есть великий мемный потенциал, и до сих пор это работает великолепно почти со всем: от литературы до видеоигр, от еды до одежды.</p>
+
+<p>Фильмы Дэвида Линча, книги Владимира Сорокина, норвежский блэк-метал, игры серии Yakuza — вокруг всего этого выстроена огромной силы мемная культура.
+Я заинтересовался ими из-за мемов, но в итоге начал их любить и ценить. 
+Как говорится, I came looking for copper and found gold.</p>
+
+<p>The Prodigy — еще один пример того, как великий мемный потенциал влияет на принимаемые решения: про эту группу и конкретно Кита Флинта я узнал раньше, чем слово «мем» вообще вошло в обиход.
+Клипы этой группы мы в школьные годы передавали друг другу на <strong>дисках с приколами</strong>, а 10-секундные зашакаленные рингтоны с Firestarter и Smack My Bitch Up пересылали по <s>ИК-порту</s> Bluetooth с телефона на телефон.</p>
+
+<p>А потом в один день я увидел обложку The Fat of the Land и прифигел: что может быть круче кислотно-оранжевого краба, шпарящего на всех парах?
+Только толпа таких же крабов на обложке Expanded Edition:</p>
+
+<p><img src="https://torunar.github.io/2024/04/29/vinyl-report/img/the-prodigy-the-fat-of-the-land-expanded.jpg" alt="" title=""></p>
+
+<p>Лучше уже не будет, можно выключать. 
+К сожалению, расширенное издание выходило только на CD, приходится довольствоваться малым, так что пластинка с главными хитами отправляется в коллекцию.</p>]]></description>
+            <pubDate>Mon, 29 Apr 2024 00:00:00 +0000</pubDate>
         </item>
     </channel>
 </rss>

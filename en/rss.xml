@@ -1,43 +1,18 @@
-<!Doctype html>
-<html lang="ru-RU">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reverse engineering Bandcamp downloads for love and piece</title>
-<meta property="og:title" content="Reverse engineering Bandcamp downloads for love and piece" />
-<meta property="og:description" content="# /usr/bin/torunar :: " />
-<meta property="twitter:card" content="summary" />
-<meta property="twitter:title" content="Reverse engineering Bandcamp downloads for love and piece" />
-<meta property="twitter:description" content="# /usr/bin/torunar :: " />
-<link rel="alternate" type="application/rss+xml" title="Свежая музыка" href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml" />
-    <link rel="stylesheet" href="https://torunar.github.io/css/main.css?v=5.0.0" />
-    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="https://torunar.github.io/rss.xml" />
-    <link rel="canonical" href="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/" />
-</head>
-<body>
-<header class="header">
-    <div class="container">
-        <h1 class="header__title">
-            <a class="header__home-link" href="https://torunar.github.io/"># /usr/bin/torunar</a>
-            <small class="header__description"></small>
-        </h1>
-    </div>
-</header>
-    <div class="container">
-        <div class="post">
-            <div class="primary-wrapper">
-                <div class="post__title-wrapper">
-                    <h1 class="post__title">Reverse engineering Bandcamp downloads for love and piece</h1>
-                    <small class="post__date">2024/06/24</small>
-                </div>
-                <div class="post__preview">
-                    
-<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/cover.png" alt="Combination of cUrl and Bandcamp logos" title=""></p>
-                </div>
-                <div class="post__content">
-                    
-<p><em>This post was originally published in English, but is also accessible in <a href="https://torunar.github.io/2024/06/24/bandcamp-downloads/">Russian</a>.</em></p>
-
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title># /usr/bin/torunar --locale=en-US</title>
+        <link>https://torunar.github.io/en</link>
+        <description></description>
+        <language>en-US</language>
+        <lastBuildDate>Tue, 09 Jul 2024 08:36:33 +0000</lastBuildDate>
+        <generator>Cider v5.0.0</generator>
+        <item>
+            <title>Reverse engineering Bandcamp downloads for love and piece</title>
+            <link>https://torunar.github.io/en/2024/06/24/bandcamp-downloads/</link>
+            <guid>https://torunar.github.io/en/2024/06/24/bandcamp-downloads/</guid>
+            <description><![CDATA[
+<p><img src="https://torunar.github.io/en/2024/06/24/bandcamp-downloads/img/cover.png" alt="Combination of cUrl and Bandcamp logos" title=""></p>
 <p><em><strong>Disclaimer</strong>: It turned out to be much longer and personal than I originally expected.</em>
 <em>I decided to keep it this way, but if you came here only for programming stuff, you are more than welcome to <a href="#technical">skip to technical details</a>.</em></p>
 
@@ -61,7 +36,7 @@ It was a gamble, and I enjoyed every single minute of it.</p>
 <p>I don't get the same feeling from Spotify where recommendations look like "You liked sugar, so you'll probably like maltitol and aspartame" and I hate Apple way too much to even consider the idea of buying their music service subscription.
 Subscriptions in general don't cut it for me: if I paid for music, I want it safely stored on my computer so I can copy it to my audio player (with hardware buttons) and listen it through wired headphones:</p>
 
-<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/player.jpg" alt="Player" title=""></p>
+<p><img src="https://torunar.github.io/en/2024/06/24/bandcamp-downloads/img/player.jpg" alt="Player" title=""></p>
 
 <p>And it's not just music: I feel deeply betrayed by Sony who banned one of my PlayStation accounts and won't allow me to buy games from one of the remaining two;
 the possibility of losing access to Steam games I (don't) own also looks quite grim.
@@ -89,7 +64,7 @@ Legally.
 No strings attached.
 They even let you choose the format and quality, isn't it nice?</p>
 
-<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/format-selector.png" alt="Bandcamp download format selector" title=""></p>
+<p><img src="https://torunar.github.io/en/2024/06/24/bandcamp-downloads/img/format-selector.png" alt="Bandcamp download format selector" title=""></p>
 
 <p>And even if something is not available freely, there's of course a way to download it with, say, <a href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a>.
 Bandcamp understand it and openly admit that they're not going to spend development time and money to fix something that is not broken: <a href="https://bandcamp.com/help/audio_basics#steal">"I heard you can steal music on Bandcamp. What are you doing about this?"</a>.
@@ -177,7 +152,7 @@ The content of this attribute is quite long, so let's focus only on this part:</
 <p>It looks like a list of formats and URLs.
 Let's take one of them and try shoving it in the address bar:</p>
 
-<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/download-expired.png" alt="Download expired" title=""></p>
+<p><img src="https://torunar.github.io/en/2024/06/24/bandcamp-downloads/img/download-expired.png" alt="Download expired" title=""></p>
 
 <p>Bummer.
 Is it time to use the network monitor to debug stuff?
@@ -207,7 +182,7 @@ When I change format on the free download page to MP3-320, I can see the request
 <p>Will it work if I use the <code>download_url</code> from the response?
 It surely does, I get my sweet ZIP archive and there is free music inside:</p>
 
-<p><img src="https://torunar.github.io/2024/06/24/bandcamp-downloads-en/img/free-music.png" alt="lol-limeware" title=""></p>
+<p><img src="https://torunar.github.io/en/2024/06/24/bandcamp-downloads/img/free-music.png" alt="lol-limeware" title=""></p>
 
 <p>The problem is I have no idea how the trailing part of <code>ts</code> and the <code>.rand</code> parameter are calculated.
 What response will I get if I put random values there?
@@ -254,18 +229,8 @@ curl -o music.zip "${DL_URL}"
 </code></pre>
 
 <p>And I guess it's time for me to stop and say thank you for reading all the way to the end.
-I'll be back with other technical shenanigans any time soon, stay tuned!</p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-<footer class="footer">
-    <div class="container">
-        <div class="footer__links">
-            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+I'll be back with other technical shenanigans any time soon, stay tuned!</p>]]></description>
+            <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
+        </item>
+    </channel>
+</rss>

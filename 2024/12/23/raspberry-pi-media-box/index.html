@@ -1,0 +1,154 @@
+<!Doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Медиа-бокс из Raspbery Pi 4</title>
+<meta property="og:title" content="Медиа-бокс из Raspbery Pi 4" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Медиа-бокс из Raspbery Pi 4" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+<link rel="alternate" type="application/rss+xml" title="Свежая музыка" href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml" />
+    <link rel="stylesheet" href="https://torunar.github.io/css/main.css?v=5.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="https://torunar.github.io/rss.xml" />
+    <link rel="canonical" href="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="https://torunar.github.io/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Медиа-бокс из Raspbery Pi 4</h1>
+                    <small class="post__date">2024/12/23</small>
+                </div>
+                <div class="post__preview">
+                    
+<p>Произошла классическая ситуация — программист дорвался до самого популярного одноплатного компьютера, и тут все как заверте...</p>
+                </div>
+                <div class="post__content">
+                    
+<p><img src="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/why.jpg" alt="мем с котом" title=""></p>
+
+<p>Раньше для просмотра YouTube и сериалов с жесткого у меня к телевизору был подключен старый MacBook.
+Рабочее решение, но есть несколько нюансов:</p>
+
+<ul>
+<li>Многовато шума: при просмотре видео разделочная доска идет на взлет.</li>
+<li>Ноутбук в доме один, поэтому одновременно играть в Half-Life 2 и что-то смотреть не получится.</li>
+<li>Хотя почти вся периферия (HDMI-кабель, колонки, зарядка) и подключена через Apple'овский хаб, приходится перетыкать несколько проводов, если ноут нужно куда-то отнести.</li>
+</ul>
+
+<p>В общем, в какой-то момент я захотел замутить медиа-бокс, который будет воткнут в телевизор 24/7 чисто для просмотра видосов.
+На местном аукционе получилось перехватить Raspberry Pi 4B с 8 ГБ ОЗУ процентов на 30% дешевле новой, и я засел красноглазить.</p>
+
+<h2>Настройка</h2>
+
+<p>Первым делом я отформатировал первую попавшуюся под руку microSD карту и накатил на нее образ 64-битной Raspberry Pi OS Lite (бывший Raspbian).
+Многократные попытки сделать загрузочную карту через Raspberry Pi Imager закончились провалом, поэтому просто использовал <code>dd</code>:</p>
+
+<pre><code>$ wget https://downloads.raspberrypi.com/raspios_lite_arm64/images/raspios_lite_arm64-2024-11-19/2024-11-19-raspios-bookworm-arm64-lite.img.xz
+$ unxz 2024-11-19-raspios-bookworm-arm64-lite.img.xz
+$ dd -if=2024-11-19-raspios-bookworm-arm64-lite.img -of=/dev/mmcblk0
+</code></pre>
+
+<p>После загрузки с карты попал в голую консоль, через <code>raspi-config</code> настроил дату и время, подключился к Wi-Fi и включил вход в систему без логина.
+Затем через <code>apt</code> скачал обновления, накатил <code>xinit</code>, установил Fluxbox как среду рабочего стола.
+В <code>~/.xinitrc</code> прописал:</p>
+
+<pre><code>if [ -f ~/.Xresources ]; then
+    xrdb -merge ~/.Xresources
+fi
+startfluxbox
+</code></pre>
+
+<p>В <code>~/.bashrc</code> добавил:</p>
+
+<pre><code>if [[ -z $DISPLAY &amp;&amp; $XDG_VTNR -eq 1 ]]; then
+    exec startx
+fi
+</code></pre>
+
+<p>Коробка подключена к телевизору с экраном 40" и разрешением 1920х1080.
+С дивана в полутора метрах от телевизора интерфейс мелковат, поэтому сделал <a href="https://github.com/torunar/raspberry-pi-media-box/blob/master/.fluxbox/styles/TV/theme.cfg">отдельную тему</a> для Fluxbox и настроил масштабирование для GTK и QT приложений в <code>~/.bashrc</code>:</p>
+
+<pre><code>export GDK_SCALE=2
+export QT_SCALE_FACTOR=2
+</code></pre>
+
+<p>По мелочи еще подкрутил меню, автозапуск, все это тоже в репозитории можно посмотреть: <a href="https://github.com/torunar/raspberry-pi-media-box/blob/master/.fluxbox/">torunar/raspberry-pi-media-box</a>.</p>
+
+<p>Для просмотра YouTube установил клиент <a href="https://freetubeapp.io/">FreeTube</a>, которым до этого пользовался на Windows, а для кино и сериалов взял VLC, потому что в нем есть ряд хаков для нормальной производительности на RPi.
+Как файловый менеджер выбрал привычный Thunar; экранная клавиатура — легковесная <code>matchbox-keyboard</code>.</p>
+
+<p>Я уже года два живу с колонками Logitech Z407.
+Киллер-фича, из-за которой я их в свое купил, — это работа сразу с тремя источниками: AUX (в него воткнут проигрыватель), Bluetooh (для подключения телефона с каким-нибудь Apple Music) и USB (воткнут в компьютер).
+Для управления колонкой в комплекте идет «шайба»: с нее и источники можно менять, и громкостью рулить, и треки переключать.
+RPi без проблем подхватил USB аудио устройство, я только назначил его по умолчанию в <code>raspi-config</code>.
+И хоть переключение паузы при нажатии на «шайбу» заработало в VLC из коробки, системная громкость при повороте «шайбы» не менялась.
+Установил <code>volumeicon</code>, настроил в нем отображение уровня громкости при изменении.</p>
+
+<p>Как все это выглядит в сборе:</p>
+
+<p><span class="gallery-2">
+<a href="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/desktop.png"><img src="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/desktop.png" alt="Рабочий стол с меню" title=""></a>
+<a href="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/terminal.png"><img src="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/terminal.png" alt="Терминал с клавиатурой" title=""></a>
+</span></p>
+
+<p><span class="gallery-2">
+<a href="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/files.png"><img src="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/files.png" alt="Файлы" title=""></a>
+<a href="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/freetube.png"><img src="https://torunar.github.io/2024/12/23/raspberry-pi-media-box/img/freetube.png" alt="FreeTube" title=""></a>
+</span></p>
+
+<h2>Косяки</h2>
+
+<p>Как известно, Linux, Linux never changes, поэтому <em>искаропке</em> заработало не все.
+Часть проблем удалось если не решить, то обойти, часть остаются как есть.</p>
+
+<p>RPi не подключается к Wi-Fi, если роутер выбирает <em>какой-то не тот</em> канал автоматически.
+Подозреваю, что это как-то связано с региональными ограничениями по беспроводным каналам в разных странах.
+Откровенно лень было разбираться с этим каждый раз, поэтому временно прибил гвоздями в настройках роутера один канал, с которым все работает.
+Фу-фу.</p>
+
+<p>Другая проблема — не подключается по Bluetooth мышь Mi Silent Mouse.
+Любые попытки спарить мышь с коробкой через <code>bluetoothctl</code> выдают один и тот же результат:</p>
+
+<pre><code>Attempting to pair with [mac address]
+[CHG] Device [mac address] Connected: yes
+Failed to pair: org.bluez.Error.AuthenticationFailed
+[CHG] Device [mac address] Connected: no
+</code></pre>
+
+<p>Этот китайский кусок пластика через жеппь работает по Bluetooth даже в Windows, так что пока что забил, подключаю мышь через беспроводной адаптер, который в комплекте шел.</p>
+
+<p>Самая большая беда — Freetube почти не тянет видео в 1080p: аппаратной поддержки кодеков, которыми YouTube кодирует свою залупу, в RPi нет.
+Проблема якобы как-то решена в LibreElec, Kodi и VLC, но я пока остановился на грустном смотрении в 720p.</p>
+
+<h2>Что дальше</h2>
+
+<p>А собственно, на этом все.</p>
+
+<p>Несмотря на реально гнилую карту памяти, с которой все запущено, работает система шустро (что логично, карта же основном при старте системы используется), но при желании можно накатить Alpine и посмотреть, что будет в нем.
+Если не найду решения для тормозящего YouTube, то попробую бахнуть LibreELEC, который позиционируется как ультимативное решение для медиа, и проверю, как обстоят дела в нем.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

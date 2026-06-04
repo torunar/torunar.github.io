@@ -5,8 +5,61 @@
         <link>https://torunar.github.io/en</link>
         <description></description>
         <language>en-US</language>
-        <lastBuildDate>Thu, 05 Feb 2026 21:49:32 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 04 Jun 2026 11:53:43 +0000</lastBuildDate>
         <generator>Cider v5.0.0</generator>
+        <item>
+            <title>Getting Logitech Z407 control dial working on Raspberry Pi OS</title>
+            <link>https://torunar.github.io/en/2026/06/04/z407-play-pause-freetube/</link>
+            <guid>https://torunar.github.io/en/2026/06/04/z407-play-pause-freetube/</guid>
+            <description><![CDATA[<p>I have a pair of Logitech Z407 speakers connected to my Raspberry Pi 4 that I use to watch videos on my dumb TV at home.
+The speakers come with a puck (officially called a "control dial") that controls audio volume and toggles between play and pause when clicked:</p>
+
+<p><img src="https://torunar.github.io/en/2026/06/04/z407-play-pause-freetube/img/z407.png" alt="" title=""></p>
+
+<p>This feature works natively in VLC, but for some reason the puck doesn't do anything when watching videos in <a href="https://freetubeapp.io">FreeTube</a>, a privacy-focused, distraction-free YouTube player.</p>
+
+<p>Luckily, FreeTube implements the <a href="http://specifications.freedesktop.org/mpris-spec/latest/">MPRIS D-Bus Interface Specification</a>, which means that it can be controlled with the <code>playerctl</code> utility.
+To get it working on Raspberry Pi OS with <code>labwc</code>, you need to bind the <code>XF86AudioPlay</code> event to the <code>playerctl play-pause</code> command via the <code>~/.config/labwc/rc.xml</code> file:</p>
+
+<pre><code>&lt;keybind key="XF86AudioPlay"&gt;
+    &lt;action name="Execute"&gt;
+        &lt;command&gt;playerctl play-pause&lt;/command&gt;
+    &lt;/action&gt;
+&lt;/keybind&gt;
+</code></pre>
+
+<p>For example, my current <code>rc.xml</code> looks like this:</p>
+
+<pre><code>&lt;?xml version="1.0"?&gt;
+&lt;openbox_config xmlns="http://openbox.org/3.4/rc"&gt;
+    &lt;theme&gt;
+        &lt;font place="ActiveWindow"&gt;
+            &lt;name&gt;PibotoLt&lt;/name&gt;
+            &lt;size&gt;18&lt;/size&gt;
+            &lt;weight&gt;Bold&lt;/weight&gt;
+            &lt;slant&gt;Normal&lt;/slant&gt;
+        &lt;/font&gt;
+        &lt;font place="InactiveWindow"&gt;
+            &lt;name&gt;PibotoLt&lt;/name&gt;
+            &lt;size&gt;18&lt;/size&gt;
+            &lt;weight&gt;Bold&lt;/weight&gt;
+            &lt;slant&gt;Normal&lt;/slant&gt;
+        &lt;/font&gt;
+        &lt;name&gt;PiXflat&lt;/name&gt;
+    &lt;/theme&gt;
+    &lt;keyboard&gt;
+        &lt;keybind key="XF86AudioPlay"&gt;
+            &lt;action name="Execute"&gt;
+                &lt;command&gt;playerctl play-pause&lt;/command&gt;
+            &lt;/action&gt;
+        &lt;/keybind&gt;
+    &lt;/keyboard&gt;
+&lt;/openbox_config&gt;
+</code></pre>
+
+<p>Adding this keybind will affect all applications that support MPRIS, which means it will also work in Chromium, Firefox, and most modern music players.</p>]]></description>
+            <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
+        </item>
         <item>
             <title>Reverse engineering Bandcamp downloads for love and piece</title>
             <link>https://torunar.github.io/en/2024/06/24/bandcamp-downloads/</link>

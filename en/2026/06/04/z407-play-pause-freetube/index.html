@@ -1,0 +1,97 @@
+<!Doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting Logitech Z407 control dial working on Raspberry Pi OS</title>
+<meta property="og:title" content="Getting Logitech Z407 control dial working on Raspberry Pi OS" />
+<meta property="og:description" content="# /usr/bin/torunar --locale=en-US :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Getting Logitech Z407 control dial working on Raspberry Pi OS" />
+<meta property="twitter:description" content="# /usr/bin/torunar --locale=en-US :: " />
+
+    <link rel="stylesheet" href="https://torunar.github.io/en/css/main.css?v=5.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar --locale=en-US" href="https://torunar.github.io/en/rss.xml" />
+    <link rel="canonical" href="https://torunar.github.io/en/2026/06/04/z407-play-pause-freetube/" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="https://torunar.github.io/en/"># /usr/bin/torunar --locale=en-US</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Getting Logitech Z407 control dial working on Raspberry Pi OS</h1>
+                    <small class="post__date">2026/06/04</small>
+                </div>
+                <div class="post__preview">
+                    
+                </div>
+                <div class="post__content">
+                    <p>I have a pair of Logitech Z407 speakers connected to my Raspberry Pi 4 that I use to watch videos on my dumb TV at home.
+The speakers come with a puck (officially called a "control dial") that controls audio volume and toggles between play and pause when clicked:</p>
+
+<p><img src="https://torunar.github.io/en/2026/06/04/z407-play-pause-freetube/img/z407.png" alt="" title=""></p>
+
+<p>This feature works natively in VLC, but for some reason the puck doesn't do anything when watching videos in <a href="https://freetubeapp.io">FreeTube</a>, a privacy-focused, distraction-free YouTube player.</p>
+
+<p>Luckily, FreeTube implements the <a href="http://specifications.freedesktop.org/mpris-spec/latest/">MPRIS D-Bus Interface Specification</a>, which means that it can be controlled with the <code>playerctl</code> utility.
+To get it working on Raspberry Pi OS with <code>labwc</code>, you need to bind the <code>XF86AudioPlay</code> event to the <code>playerctl play-pause</code> command via the <code>~/.config/labwc/rc.xml</code> file:</p>
+
+<pre><code>&lt;keybind key="XF86AudioPlay"&gt;
+    &lt;action name="Execute"&gt;
+        &lt;command&gt;playerctl play-pause&lt;/command&gt;
+    &lt;/action&gt;
+&lt;/keybind&gt;
+</code></pre>
+
+<p>For example, my current <code>rc.xml</code> looks like this:</p>
+
+<pre><code>&lt;?xml version="1.0"?&gt;
+&lt;openbox_config xmlns="http://openbox.org/3.4/rc"&gt;
+    &lt;theme&gt;
+        &lt;font place="ActiveWindow"&gt;
+            &lt;name&gt;PibotoLt&lt;/name&gt;
+            &lt;size&gt;18&lt;/size&gt;
+            &lt;weight&gt;Bold&lt;/weight&gt;
+            &lt;slant&gt;Normal&lt;/slant&gt;
+        &lt;/font&gt;
+        &lt;font place="InactiveWindow"&gt;
+            &lt;name&gt;PibotoLt&lt;/name&gt;
+            &lt;size&gt;18&lt;/size&gt;
+            &lt;weight&gt;Bold&lt;/weight&gt;
+            &lt;slant&gt;Normal&lt;/slant&gt;
+        &lt;/font&gt;
+        &lt;name&gt;PiXflat&lt;/name&gt;
+    &lt;/theme&gt;
+    &lt;keyboard&gt;
+        &lt;keybind key="XF86AudioPlay"&gt;
+            &lt;action name="Execute"&gt;
+                &lt;command&gt;playerctl play-pause&lt;/command&gt;
+            &lt;/action&gt;
+        &lt;/keybind&gt;
+    &lt;/keyboard&gt;
+&lt;/openbox_config&gt;
+</code></pre>
+
+<p>Adding this keybind will affect all applications that support MPRIS, which means it will also work in Chromium, Firefox, and most modern music players.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/en/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -5,7 +5,7 @@
         <link>https://torunar.github.io/en</link>
         <description></description>
         <language>en-US</language>
-        <lastBuildDate>Wed, 01 Jul 2026 14:09:40 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 01 Jul 2026 14:21:26 +0000</lastBuildDate>
         <generator>Cider v5.0.0</generator>
         <item>
             <title>Getting Logitech Z407 control dial working on Raspberry Pi OS</title>
@@ -59,99 +59,6 @@ To get it working on Raspberry Pi OS with <code>labwc</code>, you need to bind t
 
 <p>Adding this keybind will affect all applications that support MPRIS, which means it will also work in Chromium, Firefox, and most modern music players.</p>]]></description>
             <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
-        </item>
-        <item>
-            <title>How I use Firefox profiles in 2026</title>
-            <link>https://torunar.github.io/en/2026/07/02/firefox-profiles/</link>
-            <guid>https://torunar.github.io/en/2026/07/02/firefox-profiles/</guid>
-            <description><![CDATA[
-<p>After 15 years of using Firefox on Linux I finally got to a point where I separated my personal browsing from my work.</p>
-<p>For a long time all my extensions, bookmarks and browsing history lived in a single browser.
-At some point I got tired of seeing work-related links and bookmarks every time I open a new tab during out-of-office hours.</p>
-
-<p>Profile support has been in Firefox since, ehh, forever.
-But considering the lack of a shiny user-friendly interface, it's still considered beta, I guess?</p>
-
-<p>If you run Firefox as <code>firefox -P</code>, you will be greeted with a profile selector:</p>
-
-<p><img src="img/profile-selector.png" alt="Profile selector" title=""></p>
-
-<p>Choosing a profile will start a browser with the bookmarks, extensions and history entries that are stored for that profile.
-Your start page will have all the relevant links.
-Your settings will be set accordingly.</p>
-
-<h2>Isn't it neat?</h2>
-
-<p>Not really.</p>
-
-<p>Firefox doesn't track which of the profiles it currently uses.
-For example, I started a browser with the work profile.
-Clicking links in other applications or opening PDFs will behave inconsistently: Firefox may decide to open a new browser window with my home profile.</p>
-
-<p>It's really annoying: it takes more time to start a new app instance, and I may end up in the browser where I'm logged out of the service I'm accessing.</p>
-
-<h2>That's how I solved it</h2>
-
-<p>First, I created desktop entries in <code>~/.local/share/applications</code> for each of the profiles I use.
-The profile is specified via <code>-P {profile name}</code> parameter.</p>
-
-<p>Entry for the <code>home</code> profile: (<code>~/.local/share/applications/firefox-home.desktop</code>):</p>
-
-<p><code>
-[Desktop Entry]
-Version=1.0
-Type=Application
-Exec=firefox -P home %u
-Terminal=false
-X-MultipleArgs=false
-Icon=firefox
-StartupWMClass=firefox
-Categories=GNOME;GTK;Network;WebBrowser;
-MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
-StartupNotify=true
-Name=Firefox (Home)
-</code></p>
-
-<p>Entry for the <code>work</code> profile (<code>~/.local/share/applications/firefox-work.desktop</code>):</p>
-
-<p><code>
-[Desktop Entry]
-Version=1.0
-Type=Application
-Exec=firefox -P work %u
-Terminal=false
-X-MultipleArgs=false
-Icon=firefox
-StartupWMClass=firefox
-Categories=GNOME;GTK;Network;WebBrowser;
-MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
-StartupNotify=true
-Name=Firefox (Work)
-</code></p>
-
-<p>And then I have the following snippet of code in my system's startup script:</p>
-
-<p><code>
-if [ $(date +%u) -lt 6 -a $(date +%H) -lt 16 ]; then
-  xdg-mime default firefox-work.desktop x-scheme-handler/https
-  xdg-mime default firefox-work.desktop x-scheme-handler/http
-  xdg-mime default firefox-work.desktop x-scheme-handler/chrome
-  xdg-mime default firefox-work.desktop application/pdf
-  firefox -P work &amp;
-else
-  xdg-mime default firefox-home.desktop x-scheme-handler/https
-  xdg-mime default firefox-home.desktop x-scheme-handler/http
-  xdg-mime default firefox-home.desktop x-scheme-handler/chrome
-  xdg-mime default firefox-home.desktop application/pdf
-  firefox -P home &amp;
-fi
-</code></p>
-
-<p>During office hours (Mon-Fri, before 16:00) it assigns the <code>firefox-work</code> app to handle all link-related stuff and sets it as a default PDF reader app.
-Otherwise, <code>firefox-home</code> is used.</p>
-
-<p>Not sure if this is the best way to do it, but it's a setup I've been happy with for the past 6 months.</p>]]></description>
-            <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
         </item>
         <item>
             <title>Reverse engineering Bandcamp downloads for love and piece</title>
@@ -377,6 +284,96 @@ curl -o music.zip "${DL_URL}"
 <p>And I guess it's time for me to stop and say thank you for reading all the way to the end.
 I'll be back with other technical shenanigans any time soon, stay tuned!</p>]]></description>
             <pubDate>Mon, 24 Jun 2024 00:00:00 +0000</pubDate>
+        </item>
+        <item>
+            <title>How I use Firefox profiles in 2026</title>
+            <link>https://torunar.github.io/en/2026/07/02/firefox-profiles/</link>
+            <guid>https://torunar.github.io/en/2026/07/02/firefox-profiles/</guid>
+            <description><![CDATA[
+<p>After 15 years of using Firefox on Linux I finally got to a point where I separated my personal browsing from my work.</p>
+<p>For a long time all my extensions, bookmarks and browsing history lived in a single browser.
+At some point I got tired of seeing work-related links and bookmarks every time I open a new tab during out-of-office hours.</p>
+
+<p>Profile support has been in Firefox since, ehh, forever.
+But considering the lack of a shiny user-friendly interface, it's still considered beta, I guess?</p>
+
+<p>If you run Firefox as <code>firefox -P</code>, you will be greeted with a profile selector:</p>
+
+<p><img src="img/profile-selector.png" alt="Profile selector" title=""></p>
+
+<p>Choosing a profile will start a browser with the bookmarks, extensions and history entries that are stored for that profile.
+Your start page will have all the relevant links.
+Your settings will be set accordingly.</p>
+
+<h2>Isn't it neat?</h2>
+
+<p>Not really.</p>
+
+<p>Firefox doesn't track which of the profiles it currently uses.
+For example, I started a browser with the work profile.
+Clicking links in other applications or opening PDFs will behave inconsistently: Firefox may decide to open a new browser window with my home profile.</p>
+
+<p>It's really annoying: it takes more time to start a new app instance, and I may end up in the browser where I'm logged out of the service I'm accessing.</p>
+
+<h2>That's how I solved it</h2>
+
+<p>First, I created desktop entries in <code>~/.local/share/applications</code> for each of the profiles I use.
+The profile is specified via <code>-P {profile name}</code> parameter.</p>
+
+<p>Entry for the <code>home</code> profile: (<code>~/.local/share/applications/firefox-home.desktop</code>):</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=firefox -P home %u
+Terminal=false
+X-MultipleArgs=false
+Icon=firefox
+StartupWMClass=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
+StartupNotify=true
+Name=Firefox (Home)
+</code></pre>
+
+<p>Entry for the <code>work</code> profile (<code>~/.local/share/applications/firefox-work.desktop</code>):</p>
+
+<pre><code>[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=firefox -P work %u
+Terminal=false
+X-MultipleArgs=false
+Icon=firefox
+StartupWMClass=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
+StartupNotify=true
+Name=Firefox (Work)
+</code></pre>
+
+<p>And then I have the following snippet of code in my system's startup script:</p>
+
+<pre><code>if [ $(date +%u) -lt 6 -a $(date +%H) -lt 16 ]; then
+  xdg-mime default firefox-work.desktop x-scheme-handler/https
+  xdg-mime default firefox-work.desktop x-scheme-handler/http
+  xdg-mime default firefox-work.desktop x-scheme-handler/chrome
+  xdg-mime default firefox-work.desktop application/pdf
+  firefox -P work &amp;
+else
+  xdg-mime default firefox-home.desktop x-scheme-handler/https
+  xdg-mime default firefox-home.desktop x-scheme-handler/http
+  xdg-mime default firefox-home.desktop x-scheme-handler/chrome
+  xdg-mime default firefox-home.desktop application/pdf
+  firefox -P home &amp;
+fi
+</code></pre>
+
+<p>During office hours (Mon-Fri, before 16:00) it assigns the <code>firefox-work</code> app to handle all link-related stuff and sets it as a default PDF reader app.
+Otherwise, <code>firefox-home</code> is used.</p>
+
+<p>Not sure if this is the best way to do it, but it's a setup I've been happy with for the past 6 months.</p>]]></description>
+            <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
         </item>
     </channel>
 </rss>

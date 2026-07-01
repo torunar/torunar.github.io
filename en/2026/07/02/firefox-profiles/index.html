@@ -67,8 +67,7 @@ The profile is specified via <code>-P {profile name}</code> parameter.</p>
 
 <p>Entry for the <code>home</code> profile: (<code>~/.local/share/applications/firefox-home.desktop</code>):</p>
 
-<p><code>
-[Desktop Entry]
+<pre><code>[Desktop Entry]
 Version=1.0
 Type=Application
 Exec=firefox -P home %u
@@ -80,12 +79,11 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
 StartupNotify=true
 Name=Firefox (Home)
-</code></p>
+</code></pre>
 
 <p>Entry for the <code>work</code> profile (<code>~/.local/share/applications/firefox-work.desktop</code>):</p>
 
-<p><code>
-[Desktop Entry]
+<pre><code>[Desktop Entry]
 Version=1.0
 Type=Application
 Exec=firefox -P work %u
@@ -97,12 +95,11 @@ Categories=GNOME;GTK;Network;WebBrowser;
 MimeType=application/json;application/pdf;application/rdf+xml;application/rss+xml;application/x-xpinstall;application/xhtml+xml;application/xml;audio/flac;audio/ogg;audio/webm;image/avif;image/gif;image/jpeg;image/png;image/svg+xml;image/webp;text/html;text/xml;video/ogg;video/webm;x-scheme-handler/chrome;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/mailto;
 StartupNotify=true
 Name=Firefox (Work)
-</code></p>
+</code></pre>
 
 <p>And then I have the following snippet of code in my system's startup script:</p>
 
-<p><code>
-if [ $(date +%u) -lt 6 -a $(date +%H) -lt 16 ]; then
+<pre><code>if [ $(date +%u) -lt 6 -a $(date +%H) -lt 16 ]; then
   xdg-mime default firefox-work.desktop x-scheme-handler/https
   xdg-mime default firefox-work.desktop x-scheme-handler/http
   xdg-mime default firefox-work.desktop x-scheme-handler/chrome
@@ -115,7 +112,7 @@ else
   xdg-mime default firefox-home.desktop application/pdf
   firefox -P home &amp;
 fi
-</code></p>
+</code></pre>
 
 <p>During office hours (Mon-Fri, before 16:00) it assigns the <code>firefox-work</code> app to handle all link-related stuff and sets it as a default PDF reader app.
 Otherwise, <code>firefox-home</code> is used.</p>

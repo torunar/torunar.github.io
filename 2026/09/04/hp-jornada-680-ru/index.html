@@ -1,0 +1,108 @@
+<!Doctype html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Печатаем по-русски на HP Jornada 680</title>
+<meta property="og:title" content="Печатаем по-русски на HP Jornada 680" />
+<meta property="og:description" content="# /usr/bin/torunar :: " />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:title" content="Печатаем по-русски на HP Jornada 680" />
+<meta property="twitter:description" content="# /usr/bin/torunar :: " />
+<link rel="alternate" type="application/rss+xml" title="Свежая музыка" href="https://torunar.github.io/rss-feeds/build/bandcamp-liked-albums.xml" />
+    <link rel="stylesheet" href="https://torunar.github.io/css/main.css?v=5.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="# /usr/bin/torunar" href="https://torunar.github.io/rss.xml" />
+    <link rel="canonical" href="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/" />
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <h1 class="header__title">
+            <a class="header__home-link" href="https://torunar.github.io/"># /usr/bin/torunar</a>
+            <small class="header__description"></small>
+        </h1>
+    </div>
+</header>
+    <div class="container">
+        <div class="post">
+            <div class="primary-wrapper">
+                <div class="post__title-wrapper">
+                    <h1 class="post__title">Печатаем по-русски на HP Jornada 680</h1>
+                    <small class="post__date">2026/09/04</small>
+                </div>
+                <div class="post__preview">
+                    
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/artskey-1.png" alt="Русский текст в Microsoft Pocket Word" title=""></p>
+                </div>
+                <div class="post__content">
+                    
+<p>Есть у меня HP Jornada 680.
+Это великолепный маленький компьютер с ути-пути клавиатурой, портативным офисом и диктофоном, и я бы с огромным удовольствием печатал на нем всякие мелкие заметки или вел журнал, но есть один нюанс, который сильно все усложняет. 
+Железка локализована для рынков Северной Европы: на клавиатуре стоят шведско-финнско-норвежско-датские буквы, а в ROM'е с операционкой (да-да, Windows CE тут находится в неперезаписываемой памяти!) есть только метод ввода для этих языков. 
+Поэтому <em>просто</em> поменять раскладку в настройках или <em>просто</em> добавить язык не получится: Microsoft на момент выхода Windows CE v2.11 такого еще не придумала, а локализация систем проводилась путем костылизации и пересборки под разные рынки.</p>
+
+<p>Почему нордическая раскладка это вообще проблема?
+Если вы думали, что знаки препинания в разных местах на американской раскладке и русском ЙЦУКЕН'е — это ад, подержите мое пиво. 
+Тут сломано процентов 90% всей пунктуации, а часть постоянно используемых символов, типа того же <code>@</code> или <code>$</code>, вообще вводятся через трехкнопочные комбо из Shift + AltGr + что-то еще.
+Просыпаясь утром каждый день, возносите хвалу всем богам, что вам не приходится жить с этим:</p>
+
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/nordic.jpg" alt="Нордическая раскладка клавиатуры" title=""></p>
+
+<p>За четыре года я так и не осилил этого монстра, поэтому на своем ноуте с линуксом использую специальную раскладку Swedish (US) — она совпадает с обычной американской, а мои родные <code>å</code>, <code>ö</code> и <code>ä</code> вводятся через правый Alt aka AltGr.
+Так вот, без привычной эмэрикэнской раскладки я в принципе не смогу печатать на этом ути-пути палмтопе быстрее, чем три слова в минуту, поэтому хотелось бы при наборе по-английски иметь все буквы и символы в привычных местах.
+А раз вы читаете этот текст на русском, то очевидно, что и по-русски было бы круто хоть как-то печатать тоже.
+К счастью, поддержка Unicode и кириллицы в шрифтах в этой операционке уже есть, нужно лишь решить проблему ввода.
+Когда я только начал тыкаться во все это, решил первым делом чинить печать на английском и сделал это достаточно быстро: утилита WR-Tools Hotkeys позволяет перенастроить определенные клавиши на ввод конкретных символов. Рабочий конфиг выглядит как-то так:</p>
+
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/wr-1.png" alt="Настройки WR-Tools Hotkeys" title=""></p>
+
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/wr-2.png" alt="Настройки WR-Tools Hotkeys" title=""></p>
+
+<p>Тут можно заметить, что клавиши отправляют свои нормальные сканкоды: <code>å</code> — это LEFT BRACKET,  а <code>-</code>, расположенный у северян справа снизу, — это SLASH, но на уровне системы они подменяются на соответствующие символы.</p>
+
+<p>Проблема печати по-русски решается уже не так тривиально.
+Во-первых, нужен ввод непосредственно кириллицы. 
+Во-вторых, нужно переключение между языками, причем и в том, и в другом буквы должны соответствовать американской и русской раскладкам. 
+В период популярности наладонников в РФ некоторые компании пытались своими силами решить задачу локализации. 
+Так, у компании АртСофт был платный ArtSKey, у великих Paragon все такой же платный Language Extender (LEng), а компания МакЦентр выпускала бесплатный RussKey. 
+Все они делали одно и то же: добавляли ввод кириллицы и индикатор языка ввода в трее:</p>
+
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/artskey-2.png" alt="О программе ArtSKey" title=""></p>
+
+<p><img src="https://torunar.github.io/2026/09/04/hp-jornada-680-ru/img/russkey.png" alt="О программе RussKey" title=""></p>
+
+<p>Эти софтины очень сложно сейчас найти и еще сложнее запустить, потому что ключей активации в открытом доступе попросту нет.
+ArtSKey я пробовал в демо-режиме, а LEng даже не смог установить, потому что Paragon требует ввода лицензии уже в инсталлере.
+Полноценно завелся только RussKey, но даже в нем все работает через жопу.
+Во-первых, он никак не трогает оригинальную, нерусскую раскладку — видимо, предполагается, что программа будет запущена на КПК, импортированном из США.
+Сочетание WR-Tools Hotkeys и RussKey не чинит проблему: переназначенные клавиши игнорируют язык ввода, при нажатии <code>å</code> на русском вводится <code>[</code>, а не <code>х</code>.
+Видимо, Hotkeys обладает большим приоритетом, чем RussKey и применяет свою логику уже поверх метода ввода.
+Во-вторых, даже при выключенном WR-Tools Hotkeys ввод русских букв работает не так, как ожидалось, полагаю, из-за вмешательства на уровне ОС. 
+Кнопка между <code>0</code> и <code>=</code> упорно вводит <code>+</code> на любом языке, вместо <code>-</code>.</p>
+
+<p>Перепробовав все, до чего я только смог дотянуться, не вижу другого решения моей проблемы, кроме как сесть и самому написать текстовый редактор, в котором вопрос переключения языков будет решен внутри программы. 
+Сейчас поставил на закачку Microsoft Embedded Tools, буду вспоминать как писать на Visual Basic и привыкать к ограничениям платформы с 16 мегабайт оперативной памяти.</p>
+
+<hr>
+
+<p>Попутно решил сделать доброе дело и начать заливать на archive.org копии софта под Windows CE, которого там не было:</p>
+
+<ul>
+<li><a href="https://archive.org/details/wr-tools-hotkeys">WR-Tools Hotkeys</a></li>
+<li><a href="https://archive.org/details/artskey">ArtSKey</a></li>
+<li><a href="https://archive.org/details/handheld-russkey-111">MacCentre Handheld RussKey v1.11</a></li>
+</ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__links">
+            <a class="rss" href="/rss.xml">RSS</a> <a class="github" href="https://github.com/torunar/">GitHub</a> <a class="telegram" href="https://t.me/misha_talks/">Telegram</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
